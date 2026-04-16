@@ -59,7 +59,7 @@ jobs:
           GITCOMMIT: ${{ github.sha }}
         run: |
           ext="${{ matrix.ext }}"
-          BUILDTIME=$(date -u +%Y-%m-%d\ %H:%M:%S)
+          BUILDTIME=$(date -u +%Y-%m-%d_%H:%M:%S)
           go build -ldflags "-s -w -X github.com/trust-forge-capital/ohmypassword/cmd/cli.version=${VERSION} -X github.com/trust-forge-capital/ohmypassword/cmd/cli.buildTime=${BUILDTIME} -X github.com/trust-forge-capital/ohmypassword/cmd/cli.gitCommit=${GITCOMMIT}" -o bin/ohmypassword-${GOOS}-${GOARCH}${ext} ./cmd/ohmypassword
 
       - name: Upload release asset
