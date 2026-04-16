@@ -14,14 +14,38 @@ var GenerateCmd = &cobra.Command{
 	Long:    i18n.T("generate_long"),
 	Aliases: []string{"gen"},
 	RunE: func(cmd *cobra.Command, args []string) error {
-		length, _ := cmd.Flags().GetInt("length")
-		charset, _ := cmd.Flags().GetString("charset")
-		strategy, _ := cmd.Flags().GetString("strategy")
-		count, _ := cmd.Flags().GetInt("count")
-		validate, _ := cmd.Flags().GetBool("validate")
-		quiet, _ := cmd.Flags().GetBool("quiet")
-		output, _ := cmd.Flags().GetString("output")
-		excludeSimilar, _ := cmd.Flags().GetBool("exclude-similar")
+		length, err := cmd.Flags().GetInt("length")
+		if err != nil {
+			return err
+		}
+		charset, err := cmd.Flags().GetString("charset")
+		if err != nil {
+			return err
+		}
+		strategy, err := cmd.Flags().GetString("strategy")
+		if err != nil {
+			return err
+		}
+		count, err := cmd.Flags().GetInt("count")
+		if err != nil {
+			return err
+		}
+		validate, err := cmd.Flags().GetBool("validate")
+		if err != nil {
+			return err
+		}
+		quiet, err := cmd.Flags().GetBool("quiet")
+		if err != nil {
+			return err
+		}
+		output, err := cmd.Flags().GetString("output")
+		if err != nil {
+			return err
+		}
+		excludeSimilar, err := cmd.Flags().GetBool("exclude-similar")
+		if err != nil {
+			return err
+		}
 
 		opts := &generator.Options{
 			Length:         length,

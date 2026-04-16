@@ -101,7 +101,9 @@ func outputCSV(results []PasswordResult, quiet bool) error {
 	if !quiet {
 		header = append(header, "entropy", "strength", "crack_time")
 	}
-	w.Write(header)
+	if err := w.Write(header); err != nil {
+		return err
+	}
 
 	for _, r := range results {
 		row := []string{r.Password}
@@ -117,7 +119,9 @@ func outputCSV(results []PasswordResult, quiet bool) error {
 				row = append(row, "", "")
 			}
 		}
-		w.Write(row)
+		if err := w.Write(row); err != nil {
+			return err
+		}
 	}
 	return nil
 }
