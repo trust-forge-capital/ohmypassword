@@ -127,10 +127,10 @@ func TestOptions_Validate(t *testing.T) {
 
 func TestGetCharset(t *testing.T) {
 	tests := []struct {
-		name           string
-		charset        string
-		wantSize       int
-		wantContains   string
+		name         string
+		charset      string
+		wantSize     int
+		wantContains string
 	}{
 		{"upper", "upper", 26, "A"},
 		{"lower", "lower", 26, "a"},
@@ -168,7 +168,7 @@ func TestExcludeSimilarChars(t *testing.T) {
 	}{
 		{
 			name:       "exclude similar from all",
-			charset:    []rune("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*"),
+			charset:    []rune(CharsetUpper + CharsetLower + CharsetDigit + CharsetSymbol),
 			wantSize:   88,
 			shouldMiss: "0",
 		},

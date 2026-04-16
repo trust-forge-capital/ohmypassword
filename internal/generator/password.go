@@ -7,7 +7,7 @@ import (
 
 func GeneratePasswords(opts *Options) ([]string, error) {
 	if err := opts.Validate(); err != nil {
-		return nil, nil
+		return nil, err
 	}
 
 	strat := strategy.GetStrategy(opts.Strategy)
