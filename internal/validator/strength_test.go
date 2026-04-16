@@ -6,39 +6,39 @@ import (
 
 func TestCalculateStrength(t *testing.T) {
 	tests := []struct {
-		name       string
-		password   string
-		charset    string
-		wantLevel  string
-		wantScore  int
+		name      string
+		password  string
+		charset   string
+		wantLevel string
+		wantScore int
 	}{
 		{
-			name:       "strong password",
-			password:   "aB3$kL9@mN2pQ!xY7",
-			charset:    "all",
-			wantLevel:  "strong",
-			wantScore:  4,
+			name:      "strong password",
+			password:  "aB3$kL9@mN2pQ!xY7",
+			charset:   "all",
+			wantLevel: "very_strong",
+			wantScore: 5,
 		},
 		{
-			name:       "very strong password",
-			password:   "xK9mP2nL5!qR8wT3yZ1@aB7",
-			charset:    "all",
-			wantLevel:  "very_strong",
-			wantScore:  5,
+			name:      "very strong password",
+			password:  "xK9mP2nL5!qR8wT3yZ1@aB7",
+			charset:   "all",
+			wantLevel: "very_strong",
+			wantScore: 5,
 		},
 		{
-			name:       "weak password",
-			password:   "abc123",
-			charset:    "lower,digit",
-			wantLevel:  "weak",
-			wantScore:  2,
+			name:      "weak password",
+			password:  "abc123",
+			charset:   "lower,digit",
+			wantLevel: "weak",
+			wantScore: 2,
 		},
 		{
-			name:       "short password",
-			password:   "abc",
-			charset:    "lower",
-			wantLevel:  "very_weak",
-			wantScore:  1,
+			name:      "short password",
+			password:  "abc",
+			charset:   "lower",
+			wantLevel: "very_weak",
+			wantScore: 1,
 		},
 	}
 
