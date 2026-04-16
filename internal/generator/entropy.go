@@ -21,7 +21,7 @@ func CalculateEntropyBits(length int, charsetSize int) int {
 }
 
 func IsEntropySufficient(password string, charsetSize int, minBits int) bool {
-	entropy := CalculateEntropyBits(password, charsetSize)
+	entropy := CalculateEntropyBits(len(password), charsetSize)
 	return entropy >= minBits
 }
 
