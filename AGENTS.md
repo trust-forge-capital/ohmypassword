@@ -27,8 +27,9 @@ make build-all  # Cross-platform builds (linux/darwin/windows, amd64/arm64)
 ## CI/Release
 
 - Release triggers on tag push (`v*`)
-- Workflow: `.github/workflows/release.yml` (lint → test → build → upload assets)
-- Release notes auto-generated; edit manually to avoid duplicates
+- Workflow: `.github/workflows/release.yml` (lint → test → build → release)
+- **Important**: Release job runs after all other jobs to prevent duplicate release notes
+- Release notes auto-generated once; edit manually to avoid duplicates
 - **Important**: Use golangci-lint v2.x (both local and CI)
   - Action: `golangci/golangci-lint-action@v9` with `version: v2.11`
   - Config: `.golangci.yml` uses v2 format (`version: "2"`, `linters.settings`)
