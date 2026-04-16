@@ -6,15 +6,22 @@ import (
 
 type SimpleStrategy struct{}
 
-func (s *SimpleStrategy) Generate(opts *generator.Options) (string, error) {
+func (s *SimpleStrategy) Generate(opts *Options) (string, error) {
 	charset := generator.GetCharset(opts.Charset)
 	if opts.ExcludeSimilar {
 		charset = generator.ExcludeSimilarChars(charset)
 	}
-	return generator.GenerateWithCharset(opts, charset)
+	return generator.GenerateWithCharset(&generator.Options{
+		Length:         opts.Length,
+		Charset:        opts.Charset,
+		Count:          opts.Count,
+		Validate:       opts.Validate,
+		Quiet:          opts.Quiet,
+		ExcludeSimilar: opts.ExcludeSimilar,
+	}, charset)
 }
 
-func (s *SimpleStrategy) CalculateEntropy(opts *generator.Options) float64 {
+func (s *SimpleStrategy) CalculateEntropy(opts *Options) float64 {
 	charsetSize := generator.GetCharsetSize(opts.Charset)
 	if opts.ExcludeSimilar {
 		excluded := generator.GetExcludedSimilarCount()

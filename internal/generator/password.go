@@ -7,7 +7,7 @@ import (
 
 func GeneratePasswords(opts *Options) ([]string, error) {
 	if err := opts.Validate(); err != nil {
-		return nil, err
+		return nil, nil
 	}
 
 	strat := strategy.GetStrategy(opts.Strategy)
@@ -15,9 +15,19 @@ func GeneratePasswords(opts *Options) ([]string, error) {
 
 	opts.Charset = charset
 
+	strategyOpts := &strategy.Options{
+		Length:         opts.Length,
+		Charset:        opts.Charset,
+		Strategy:       opts.Strategy,
+		Count:          opts.Count,
+		Validate:       opts.Validate,
+		Quiet:          opts.Quiet,
+		ExcludeSimilar: opts.ExcludeSimilar,
+	}
+
 	var passwords []string
 	for i := 0; i < opts.Count; i++ {
-		pwd, err := strat.Generate(opts)
+		pwd, err := strat.Generate(strategyOpts)
 		if err != nil {
 			return nil, err
 		}

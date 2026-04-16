@@ -24,7 +24,7 @@ func NewPronounceableStrategy() *PronounceableStrategy {
 	}
 }
 
-func (s *PronounceableStrategy) Generate(opts *generator.Options) (string, error) {
+func (s *PronounceableStrategy) Generate(opts *Options) (string, error) {
 	result := make([]rune, 0, opts.Length)
 	length := opts.Length
 
@@ -83,7 +83,7 @@ func (s *PronounceableStrategy) randomVowel() (rune, error) {
 	return rune(s.vowels[n]), nil
 }
 
-func (s *PronounceableStrategy) CalculateEntropy(opts *generator.Options) float64 {
+func (s *PronounceableStrategy) CalculateEntropy(opts *Options) float64 {
 	charsetSize := 20
 	return float64(opts.Length) * math.Log2(float64(charsetSize))
 }

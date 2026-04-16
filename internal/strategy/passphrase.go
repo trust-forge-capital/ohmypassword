@@ -22,7 +22,7 @@ func NewPassphraseStrategy() *PassphraseStrategy {
 	}
 }
 
-func (s *PassphraseStrategy) Generate(opts *generator.Options) (string, error) {
+func (s *PassphraseStrategy) Generate(opts *Options) (string, error) {
 	wordCount := opts.Length
 	if wordCount < 4 {
 		wordCount = 4
@@ -65,7 +65,7 @@ func (s *PassphraseStrategy) randomWord() (string, error) {
 	return s.words[n], nil
 }
 
-func (s *PassphraseStrategy) CalculateEntropy(opts *generator.Options) float64 {
+func (s *PassphraseStrategy) CalculateEntropy(opts *Options) float64 {
 	wordCount := opts.Length
 	if wordCount < 4 {
 		wordCount = 4

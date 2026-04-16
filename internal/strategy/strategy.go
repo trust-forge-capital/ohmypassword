@@ -1,12 +1,18 @@
 package strategy
 
-import (
-	"github.com/trust-forge-capital/ohmypassword/internal/generator"
-)
+type Options struct {
+	Length         int
+	Charset        string
+	Strategy       string
+	Count          int
+	Validate       bool
+	Quiet          bool
+	ExcludeSimilar bool
+}
 
 type Strategy interface {
-	Generate(opts *generator.Options) (string, error)
-	CalculateEntropy(opts *generator.Options) float64
+	Generate(opts *Options) (string, error)
+	CalculateEntropy(opts *Options) float64
 }
 
 var _ Strategy = (*SimpleStrategy)(nil)
