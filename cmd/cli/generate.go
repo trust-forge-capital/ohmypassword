@@ -1,6 +1,8 @@
 package cli
 
 import (
+	"errors"
+
 	"github.com/spf13/cobra"
 	"github.com/trust-forge-capital/ohmypassword/internal/generator"
 	"github.com/trust-forge-capital/ohmypassword/internal/i18n"
@@ -59,7 +61,7 @@ var GenerateCmd = &cobra.Command{
 
 		passwords, err := generator.GeneratePasswords(opts)
 		if err != nil {
-			return err
+			return translateError(err, strategy)
 		}
 
 		results := make([]ui.PasswordResult, len(passwords))
@@ -77,8 +79,34 @@ var GenerateCmd = &cobra.Command{
 			results[i] = result
 		}
 
-		return ui.Output(results, output, quiet)
+		err = ui.Output(results, output, quiet)
+		if err != nil {
+			return translateError(err, strategy)
+		}
+		return nil
 	},
+}
+
+func translateError(err error, strategy string) error {
+	if errors.Is(err, generator.ErrInvalidLength) {
+		if strategy == "passphrase" {
+			return errors.New(i18n.T("error_invalid_passphrase_length"))
+		}
+		return errors.New(i18n.T("error_invalid_length"))
+	}
+	if errors.Is(err, generator.ErrInvalidCount) {
+		return errors.New(i18n.T("error_invalid_count"))
+	}
+	if errors.Is(err, generator.ErrInvalidStrategy) {
+		return errors.New(i18n.T("error_invalid_strategy"))
+	}
+	if errors.Is(err, generator.ErrInvalidCharset) {
+		return errors.New(i18n.T("error_invalid_charset"))
+	}
+	if errors.Is(err, ui.ErrInvalidOutputFormat) {
+		return errors.New(i18n.T("error_invalid_output"))
+	}
+	return err
 }
 
 func init() {

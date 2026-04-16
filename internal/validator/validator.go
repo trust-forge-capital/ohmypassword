@@ -1,5 +1,7 @@
 package validator
 
+import "github.com/trust-forge-capital/ohmypassword/internal/i18n"
+
 type StrengthLevel string
 
 const (
@@ -30,15 +32,15 @@ func GetMinEntropyForLevel(level StrengthLevel) int {
 func GetDisplayName(level StrengthLevel) string {
 	switch level {
 	case LevelVeryWeak:
-		return "Very Weak"
+		return i18n.T("strength_very_weak")
 	case LevelWeak:
-		return "Weak"
+		return i18n.T("strength_weak")
 	case LevelReasonable:
-		return "Reasonable"
+		return i18n.T("strength_reasonable")
 	case LevelStrong:
-		return "Strong"
+		return i18n.T("strength_strong")
 	case LevelVeryStrong:
-		return "Very Strong"
+		return i18n.T("strength_very_strong")
 	default:
 		return "Unknown"
 	}

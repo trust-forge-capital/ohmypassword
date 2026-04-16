@@ -11,8 +11,14 @@ type Options struct {
 }
 
 func (o *Options) Validate() error {
-	if o.Length < 8 || o.Length > 128 {
-		return ErrInvalidLength
+	if o.Strategy == "passphrase" {
+		if o.Length < 4 || o.Length > 10 {
+			return ErrInvalidLength
+		}
+	} else {
+		if o.Length < 8 || o.Length > 128 {
+			return ErrInvalidLength
+		}
 	}
 	if o.Count < 1 || o.Count > 100 {
 		return ErrInvalidCount
