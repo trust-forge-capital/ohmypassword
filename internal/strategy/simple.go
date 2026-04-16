@@ -3,7 +3,6 @@ package strategy
 import (
 	"errors"
 	"math"
-	"math/log"
 
 	"github.com/trust-forge-capital/ohmypassword/internal/random"
 	"github.com/trust-forge-capital/ohmypassword/pkg/charset"
