@@ -1,0 +1,27 @@
+run:
+  enabled = true
+  commands = ["go run ./cmd/cli"]
+
+build:
+  enabled = true
+  commands = ["go build -o bin/ohmypassword ./cmd/cli"]
+
+test:
+  enabled = true
+  commands = ["go test -v -race ./..."]
+  timeout = "5m"
+
+lint:
+  enabled = true
+  commands = ["golangci-lint run ./..."]
+
+lint-fix:
+  enabled = true
+  commands = ["golangci-lint run ./... --fix"]
+
+fmt:
+  enabled = true
+  commands = ["go fmt ./..."]
+
+issues:
+  exclude-use-default = false

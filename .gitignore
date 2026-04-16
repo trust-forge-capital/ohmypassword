@@ -1,0 +1,43 @@
+# Binaries
+/bin/
+/*.exe
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test binary
+*.test
+
+# Output
+*.out
+/bin/
+
+# Go workspace
+go.work
+
+# Vendor
+/vendor/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build output
+dist/
+build/
+
+# Coverage
+*.cov
+coverage.txt
+
+# Temporary
+tmp/
+temp/
