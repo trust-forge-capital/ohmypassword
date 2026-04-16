@@ -158,6 +158,6 @@ jobs:
             - `ohmypassword-windows-amd64.exe` / `ohmypassword-windows-arm64`
 
             **Full Changelog**: ${{ steps.prevtag.outputs.CHANGELOG_URL }}
-          draft: true
+          draft: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
