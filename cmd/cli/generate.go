@@ -67,6 +67,7 @@ var GenerateCmd = &cobra.Command{
 			result := ui.PasswordResult{Password: pwd}
 			if validate {
 				strength := validator.CalculateStrength(pwd, opts.Charset)
+				result.Entropy = strength.Entropy
 				result.Strength = ui.StrengthInfo{
 					Level:     validator.GetDisplayName(validator.StrengthLevel(strength.Level)),
 					CrackTime: strength.CrackTime,

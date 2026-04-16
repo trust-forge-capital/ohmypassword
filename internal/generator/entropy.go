@@ -41,17 +41,11 @@ func GetEntropyLevel(entropyBits int) string {
 }
 
 func EstimateCrackTime(entropyBits int) string {
-	assumptions := map[string]int{
-		"online_throttled":   100,
-		"online_unthrottled": 1000,
-		"offline_slow":       1e6,
-		"offline_fast":       1e10,
-		"offline_fast_gpu":   1e12,
-	}
+	attackRates := []int{100, 1000, 1e6, 1e10, 1e12}
 
 	combinations := math.Pow(2, float64(entropyBits))
 
-	for _, rate := range assumptions {
+	for _, rate := range attackRates {
 		seconds := combinations / float64(rate)
 		if seconds < 60 {
 			return "< 1 second"
