@@ -76,6 +76,11 @@ ohmypassword generate --help
 ### simple (default)
 
 ```
+aB3$kL9@mN2pQ
+```
+
+With validation (`-v`):
+```
 Password: aB3$kL9@mN2pQ
   Entropy: 95.27 bits
   Strength: Strong
@@ -84,6 +89,16 @@ Password: aB3$kL9@mN2pQ
 
 ### json
 
+Default:
+```json
+[
+  {
+    "password": "aB3$kL9@mN2pQ"
+  }
+]
+```
+
+With validation (`-v`):
 ```json
 [
   {
@@ -100,6 +115,13 @@ Password: aB3$kL9@mN2pQ
 
 ### csv
 
+Default:
+```
+password
+aB3$kL9@mN2pQ
+```
+
+With validation (`-v`):
 ```
 password,entropy,strength,crack_time
 aB3$kL9@mN2pQ,95.27,Strong,centuries
@@ -107,6 +129,12 @@ aB3$kL9@mN2pQ,95.27,Strong,centuries
 
 ### table
 
+Default:
+```
+aB3$kL9@mN2pQ
+```
+
+With validation (`-v`):
 ```
 PASSWORD                     ENTROPY         STRENGTH     CRACK_TIME
 -----------------------------------------------------------------------------
@@ -115,7 +143,7 @@ aB3$kL9@mN2pQ               95.27 bits       Strong       centuries
 
 ## Quiet Mode
 
-In quiet mode (`-q`), only the password is output (one per line for multiple passwords).
+In quiet mode (`-q`), only the password is output (one per line for multiple passwords), same as default mode without validation.
 
 ```
 $ ohmypassword generate -q

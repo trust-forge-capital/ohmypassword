@@ -23,21 +23,29 @@ type StrengthInfo struct {
 }
 
 func Output(results []PasswordResult, format string, quiet bool) error {
+	hasDetails := false
+	for _, r := range results {
+		if r.Entropy > 0 || r.Strength.Level != "" {
+			hasDetails = true
+			break
+		}
+	}
+
 	switch format {
 	case "json":
-		return outputJSON(results, quiet)
+		return outputJSON(results, quiet, hasDetails)
 	case "csv":
-		return outputCSV(results, quiet)
+		return outputCSV(results, quiet, hasDetails)
 	case "table":
-		return outputTable(results, quiet)
+		return outputTable(results, quiet, hasDetails)
 	default:
-		return outputSimple(results, quiet)
+		return outputSimple(results, quiet, hasDetails)
 	}
 }
 
-func outputSimple(results []PasswordResult, quiet bool) error {
+func outputSimple(results []PasswordResult, quiet bool, hasDetails bool) error {
 	for _, r := range results {
-		if quiet {
+		if quiet || !hasDetails {
 			fmt.Println(r.Password)
 		} else {
 			fmt.Printf("Password: %s\n", r.Password)
@@ -54,7 +62,7 @@ func outputSimple(results []PasswordResult, quiet bool) error {
 	return nil
 }
 
-func outputJSON(results []PasswordResult, quiet bool) error {
+func outputJSON(results []PasswordResult, quiet bool, hasDetails bool) error {
 	type output struct {
 		Password string  `json:"password"`
 		Entropy  float64 `json:"entropy,omitempty"`
@@ -93,12 +101,12 @@ func outputJSON(results []PasswordResult, quiet bool) error {
 	return nil
 }
 
-func outputCSV(results []PasswordResult, quiet bool) error {
+func outputCSV(results []PasswordResult, quiet bool, hasDetails bool) error {
 	w := csv.NewWriter(os.Stdout)
 	defer w.Flush()
 
 	header := []string{"password"}
-	if !quiet {
+	if !quiet && hasDetails {
 		header = append(header, "entropy", "strength", "crack_time")
 	}
 	if err := w.Write(header); err != nil {
@@ -107,7 +115,7 @@ func outputCSV(results []PasswordResult, quiet bool) error {
 
 	for _, r := range results {
 		row := []string{r.Password}
-		if !quiet {
+		if !quiet && hasDetails {
 			if r.Entropy > 0 {
 				row = append(row, fmt.Sprintf("%.2f", r.Entropy))
 			} else {
@@ -126,7 +134,7 @@ func outputCSV(results []PasswordResult, quiet bool) error {
 	return nil
 }
 
-func outputTable(results []PasswordResult, quiet bool) error {
+func outputTable(results []PasswordResult, quiet bool, hasDetails bool) error {
 	type tableRow struct {
 		Password  string
 		Entropy   string
@@ -137,7 +145,7 @@ func outputTable(results []PasswordResult, quiet bool) error {
 	var tableData []tableRow
 	for _, r := range results {
 		row := tableRow{Password: r.Password}
-		if !quiet {
+		if !quiet && hasDetails {
 			if r.Entropy > 0 {
 				row.Entropy = fmt.Sprintf("%.2f bits", r.Entropy)
 			}
@@ -149,14 +157,14 @@ func outputTable(results []PasswordResult, quiet bool) error {
 		tableData = append(tableData, row)
 	}
 
-	format := "%-30s %-15s %-12s %-20s\n"
-	if quiet {
+	if quiet || !hasDetails {
 		for _, r := range results {
 			fmt.Println(r.Password)
 		}
 		return nil
 	}
 
+	format := "%-30s %-15s %-12s %-20s\n"
 	fmt.Printf(format, "PASSWORD", "ENTROPY", "STRENGTH", "CRACK TIME")
 	fmt.Println(strings.Repeat("-", 77))
 	for _, r := range tableData {
