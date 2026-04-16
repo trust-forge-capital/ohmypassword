@@ -125,11 +125,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Get previous tag
+        id: prevtag
+        run: |
+          git fetch --tags
+          PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+          echo "PREV_TAG=$PREV_TAG" >> $GITHUB_OUTPUT
+
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           files: bin/ohmypassword-*
           generate_release_notes: true
+          previous_tag_name: ${{ steps.prevtag.outputs.PREV_TAG }}
           draft: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
