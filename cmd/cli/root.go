@@ -3,6 +3,7 @@ package cli
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/spf13/cobra"
 	"github.com/trust-forge-capital/ohmypassword/internal/i18n"
@@ -77,8 +78,10 @@ func updateCommandStrings() {
 
 var versionCmd = &cobra.Command{
 	Use:   "version",
-	Short: "version",
+	Short: i18n.T("version_use"),
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(cmd.Version)
+		fmt.Println("Version:", version)
+		fmt.Println("Commit:", gitCommit)
+		fmt.Println("Build:", strings.ReplaceAll(buildTime, "_", " "))
 	},
 }
