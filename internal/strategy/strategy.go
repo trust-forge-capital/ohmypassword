@@ -9,12 +9,16 @@ type Strategy interface {
 	CalculateEntropy(opts *generator.Options) float64
 }
 
+var _ Strategy = (*SimpleStrategy)(nil)
+var _ Strategy = (*PronounceableStrategy)(nil)
+var _ Strategy = (*PassphraseStrategy)(nil)
+
 func GetStrategy(name string) Strategy {
 	switch name {
 	case "pronounceable":
-		return &PronounceableStrategy{}
+		return NewPronounceableStrategy()
 	case "passphrase":
-		return &PassphraseStrategy{}
+		return NewPassphraseStrategy()
 	default:
 		return &SimpleStrategy{}
 	}

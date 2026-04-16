@@ -5,3 +5,5 @@ type RNG interface {
 	Uint64() (uint64, error)
 	Bytes(n int) ([]byte, error)
 }
+
+var _ RNG = (*CryptoRNG)(nil)

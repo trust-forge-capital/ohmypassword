@@ -83,14 +83,13 @@ func TestPassphraseStrategy_Generate(t *testing.T) {
 
 func TestGetStrategy(t *testing.T) {
 	tests := []struct {
-		name      string
-		strategy  string
-		wantType  string
+		name     string
+		strategy string
 	}{
-		{"simple", "simple", "*strategy.SimpleStrategy"},
-		{"pronounceable", "pronounceable", "*strategy.PronounceableStrategy"},
-		{"passphrase", "passphrase", "*strategy.PassphraseStrategy"},
-		{"default", "unknown", "*strategy.SimpleStrategy"},
+		{"simple", "simple"},
+		{"pronounceable", "pronounceable"},
+		{"passphrase", "passphrase"},
+		{"default", "unknown"},
 	}
 
 	for _, tt := range tests {

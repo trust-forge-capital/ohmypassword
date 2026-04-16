@@ -127,10 +127,10 @@ func TestOptions_Validate(t *testing.T) {
 
 func TestGetCharset(t *testing.T) {
 	tests := []struct {
-		name       string
-		charset    string
-		wantSize   int
-		wantContains string
+		name           string
+		charset        string
+		wantSize       int
+		wantContains   string
 	}{
 		{"upper", "upper", 26, "A"},
 		{"lower", "lower", 26, "a"},
@@ -154,6 +154,36 @@ func TestGetCharset(t *testing.T) {
 			}
 			if !found {
 				t.Errorf("GetCharset() does not contain %v", tt.wantContains)
+			}
+		})
+	}
+}
+
+func TestExcludeSimilarChars(t *testing.T) {
+	tests := []struct {
+		name       string
+		charset    []rune
+		wantSize   int
+		shouldMiss string
+	}{
+		{
+			name:       "exclude similar from all",
+			charset:    []rune("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*"),
+			wantSize:   88,
+			shouldMiss: "0",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result := ExcludeSimilarChars(tt.charset)
+			if len(result) != tt.wantSize {
+				t.Errorf("ExcludeSimilarChars() size = %v, want %v", len(result), tt.wantSize)
+			}
+			for _, c := range result {
+				if string(c) == tt.shouldMiss {
+					t.Errorf("ExcludeSimilarChars() should not contain %v", tt.shouldMiss)
+				}
 			}
 		})
 	}
