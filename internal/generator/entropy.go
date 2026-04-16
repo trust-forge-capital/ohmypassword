@@ -42,11 +42,11 @@ func GetEntropyLevel(entropyBits int) string {
 
 func EstimateCrackTime(entropyBits int) string {
 	assumptions := map[string]int{
-		"online_throttled":    100,
-		"online_unthrottled":  1000,
-		"offline_slow":        1e6,
-		"offline_fast":        1e10,
-		"offline_fast_gpu":    1e12,
+		"online_throttled":   100,
+		"online_unthrottled": 1000,
+		"offline_slow":       1e6,
+		"offline_fast":       1e10,
+		"offline_fast_gpu":   1e12,
 	}
 
 	combinations := math.Pow(2, float64(entropyBits))
@@ -54,17 +54,17 @@ func EstimateCrackTime(entropyBits int) string {
 	for name, rate := range assumptions {
 		seconds := combinations / float64(rate)
 		if seconds < 60 {
-			return name + ": < 1 second"
+			return "< 1 second"
 		} else if seconds < 3600 {
-			return name + ": < 1 hour"
+			return "< 1 hour"
 		} else if seconds < 86400 {
-			return name + ": < 1 day"
+			return "< 1 day"
 		} else if seconds < 31536000 {
-			return name + ": " + formatDuration(seconds)
+			return formatDuration(seconds)
 		} else if seconds < 31536000*100 {
-			return name + ": " + formatDuration(seconds)
+			return formatDuration(seconds)
 		} else if seconds < 31536000*1000 {
-			return name + ": centuries"
+			return "centuries"
 		}
 	}
 	return "millennia+"

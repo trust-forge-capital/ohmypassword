@@ -11,9 +11,9 @@ import (
 )
 
 var GenerateCmd = &cobra.Command{
-	Use:   "generate",
-	Short: i18n.T("generate_use"),
-	Long:  i18n.T("generate_long"),
+	Use:     "generate",
+	Short:   i18n.T("generate_use"),
+	Long:    i18n.T("generate_long"),
 	Aliases: []string{"gen"},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		length, _ := cmd.Flags().GetInt("length")
@@ -44,7 +44,12 @@ var GenerateCmd = &cobra.Command{
 		for i, pwd := range passwords {
 			result := ui.PasswordResult{Password: pwd}
 			if validate {
-				result.Strength = validator.CalculateStrength(pwd, opts.Charset)
+				strength := validator.CalculateStrength(pwd, opts.Charset)
+				result.Strength = ui.StrengthInfo{
+					Level:     validator.GetDisplayName(validator.StrengthLevel(strength.Level)),
+					CrackTime: strength.CrackTime,
+					Score:     strength.Score,
+				}
 			}
 			results[i] = result
 		}
