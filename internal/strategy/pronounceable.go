@@ -51,14 +51,23 @@ func (s *PronounceableStrategy) Generate(opts *Options) (string, error) {
 	}
 
 	if hasDigit {
-		d, _ := s.rng.Intn(len(s.digits))
+		d, err := s.rng.Intn(len(s.digits))
+		if err != nil {
+			return "", err
+		}
 		result = append(result, rune(s.digits[d]))
 	}
 
 	if hasSymbol {
 		symbols := "!@#$%^&*"
-		pos, _ := s.rng.Intn(len(result))
-		sym, _ := s.rng.Intn(len(symbols))
+		pos, err := s.rng.Intn(len(result))
+		if err != nil {
+			return "", err
+		}
+		sym, err := s.rng.Intn(len(symbols))
+		if err != nil {
+			return "", err
+		}
 		symbolsRune := []rune(symbols)
 		result = insertRune(result, pos, symbolsRune[sym])
 	}

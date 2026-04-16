@@ -41,15 +41,24 @@ func (s *PassphraseStrategy) Generate(opts *Options) (string, error) {
 
 	hasDigit := strings.Contains(opts.Charset, "digit") || opts.Charset == "all"
 	if hasDigit {
-		d, _ := s.rng.Intn(100)
+		d, err := s.rng.Intn(100)
+		if err != nil {
+			return "", err
+		}
 		result = append(result, string(rune('0'+d/10)), string(rune('0'+d%10)))
 	}
 
 	hasSymbol := strings.Contains(opts.Charset, "symbol") || opts.Charset == "all"
 	if hasSymbol {
 		symbols := "!@#$%^&*"
-		pos, _ := s.rng.Intn(len(result))
-		sym, _ := s.rng.Intn(len(symbols))
+		pos, err := s.rng.Intn(len(result))
+		if err != nil {
+			return "", err
+		}
+		sym, err := s.rng.Intn(len(symbols))
+		if err != nil {
+			return "", err
+		}
 		result = insertString(result, pos, string(symbols[sym]))
 	}
 

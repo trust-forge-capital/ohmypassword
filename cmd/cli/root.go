@@ -18,8 +18,8 @@ var RootCmd = &cobra.Command{
 	Short: i18n.T("root_use"),
 	Long:  i18n.T("root_long"),
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
-		lang, _ := cmd.Flags().GetString("lang")
-		if lang != "" {
+		lang, err := cmd.Flags().GetString("lang")
+		if err == nil && lang != "" {
 			i18n.SetLanguage(lang)
 		}
 	},

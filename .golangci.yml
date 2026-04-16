@@ -1,23 +1,26 @@
 version: "2"
-
-linters:
-  enable:
-    - errcheck
-    - govet
-    - ineffassign
-    - staticcheck
-    - unused
-
-linters-settings:
-  errcheck:
-    check-type-assertions: true
-    check-blank: true
-
-issues:
-  exclude-use-default: false
-  max-issues-per-linter: 0
-  max-same-issues: 0
-
 run:
-  timeout: 5m
   tests: true
+linters:
+  settings:
+    errcheck:
+      check-type-assertions: true
+      check-blank: true
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$

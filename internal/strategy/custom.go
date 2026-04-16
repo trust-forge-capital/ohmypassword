@@ -37,19 +37,28 @@ func (s *CustomStrategy) Generate(opts *Options) (string, error) {
 		chars := charset.GetCharsetRunes(rule.Charset)
 		count := rule.MinCount
 		if rule.MaxCount > rule.MinCount {
-			n, _ := s.rng.Intn(rule.MaxCount - rule.MinCount + 1)
+			n, err := s.rng.Intn(rule.MaxCount - rule.MinCount + 1)
+			if err != nil {
+				return "", err
+			}
 			count = rule.MinCount + n
 		}
 
 		for i := 0; i < count && len(result) < opts.Length; i++ {
-			idx, _ := s.rng.Intn(len(chars))
+			idx, err := s.rng.Intn(len(chars))
+			if err != nil {
+				return "", err
+			}
 			result = append(result, chars[idx])
 		}
 	}
 
 	for len(result) < opts.Length {
 		chars := charset.GetCharsetRunes(opts.Charset)
-		idx, _ := s.rng.Intn(len(chars))
+		idx, err := s.rng.Intn(len(chars))
+		if err != nil {
+			return "", err
+		}
 		result = append(result, chars[idx])
 	}
 
