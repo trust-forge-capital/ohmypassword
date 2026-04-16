@@ -129,7 +129,7 @@ jobs:
         id: prevtag
         run: |
           git fetch --tags
-          PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+          PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "v1.0.0")
           echo "PREV_TAG=$PREV_TAG" >> $GITHUB_OUTPUT
           echo "CHANGELOG_URL=https://github.com/trust-forge-capital/ohmypassword/compare/$PREV_TAG...${{ github.ref_name }}" >> $GITHUB_OUTPUT
 
