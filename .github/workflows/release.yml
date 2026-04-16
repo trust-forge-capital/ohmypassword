@@ -131,13 +131,33 @@ jobs:
           git fetch --tags
           PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
           echo "PREV_TAG=$PREV_TAG" >> $GITHUB_OUTPUT
+          echo "CHANGELOG_URL=https://github.com/trust-forge-capital/ohmypassword/compare/$PREV_TAG...${{ github.ref_name }}" >> $GITHUB_OUTPUT
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           files: bin/ohmypassword-*
-          generate_release_notes: true
-          previous_tag_name: ${{ steps.prevtag.outputs.PREV_TAG }}
+          generate_release_notes: false
+          body: |
+            ## What's New in ${{ github.ref_name }}
+
+            ### Bug Fixes
+            - Fix CI: Upgrade golangci-lint to v2.11 format
+
+            ### Previous v1.1.0 Features
+            - **i18n Enhancement**: Full translation support for help text, error messages, strength levels
+            - **Table Output**: New `-o table` format using go-pretty/v6
+            - **Validation Fixes**: 
+              - Passphrase word count validation (4-10 words)
+              - Output format validation
+              - Quiet mode for JSON/CSV output
+
+            ### Downloads
+            - `ohmypassword-darwin-amd64` / `ohmypassword-darwin-arm64`
+            - `ohmypassword-linux-amd64` / `ohmypassword-linux-arm64`  
+            - `ohmypassword-windows-amd64.exe` / `ohmypassword-windows-arm64`
+
+            **Full Changelog**: ${{ steps.prevtag.outputs.CHANGELOG_URL }}
           draft: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
