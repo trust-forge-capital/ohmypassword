@@ -1,15 +1,15 @@
 run:
-	go run ./cmd/cli
+	go run ./cmd/ohmypassword
 
 build:
-	go build -o bin/ohmypassword ./cmd/cli
+	go build -o bin/ohmypassword ./cmd/ohmypassword
 
 build-all:
-	GOOS=linux GOARCH=amd64 go build -o bin/ohmypassword-linux-amd64 ./cmd/cli
-	GOOS=linux GOARCH=arm64 go build -o bin/ohmypassword-linux-arm64 ./cmd/cli
-	GOOS=darwin GOARCH=amd64 go build -o bin/ohmypassword-darwin-amd64 ./cmd/cli
-	GOOS=darwin GOARCH=arm64 go build -o bin/ohmypassword-darwin-arm64 ./cmd/cli
-	GOOS=windows GOARCH=amd64 go build -o bin/ohmypassword-windows-amd64.exe ./cmd/cli
+	GOOS=linux GOARCH=amd64 go build -o bin/ohmypassword-linux-amd64 ./cmd/ohmypassword
+	GOOS=linux GOARCH=arm64 go build -o bin/ohmypassword-linux-arm64 ./cmd/ohmypassword
+	GOOS=darwin GOARCH=amd64 go build -o bin/ohmypassword-darwin-amd64 ./cmd/ohmypassword
+	GOOS=darwin GOARCH=arm64 go build -o bin/ohmypassword-darwin-arm64 ./cmd/ohmypassword
+	GOOS=windows GOARCH=amd64 go build -o bin/ohmypassword-windows-amd64.exe ./cmd/ohmypassword
 
 test:
 	go test -v -race -coverprofile=coverage.txt ./...
@@ -26,6 +26,6 @@ clean:
 	rm -f coverage.txt
 
 install:
-	go install ./cmd/cli
+	go install ./cmd/ohmypassword
 
 .PHONY: run build build-all test lint fmt clean install
