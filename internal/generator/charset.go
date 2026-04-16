@@ -1,10 +1,10 @@
 package generator
 
 const (
-	CharsetUpper   = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	CharsetLower   = "abcdefghijklmnopqrstuvwxyz"
-	CharsetDigit   = "0123456789"
-	CharsetSymbol  = "!@#$%^&*()_+-=[]{}|;:,.<>?"
+	CharsetUpper  = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	CharsetLower  = "abcdefghijklmnopqrstuvwxyz"
+	CharsetDigit  = "0123456789"
+	CharsetSymbol = "!@#$%^&*()_+-=[]{}|;:,.<>?"
 )
 
 var SimilarChars = map[rune]rune{
@@ -26,8 +26,16 @@ func GetCharset(charset string) []rune {
 		chars = []rune(CharsetLower)
 	case "digit":
 		chars = []rune(CharsetDigit)
+	case "lower,digit":
+		chars = []rune(CharsetLower + CharsetDigit)
 	case "symbol":
 		chars = []rune(CharsetSymbol)
+	case "upper,lower":
+		chars = []rune(CharsetUpper + CharsetLower)
+	case "upper,lower,digit":
+		chars = []rune(CharsetUpper + CharsetLower + CharsetDigit)
+	case "upper,lower,digit,symbol":
+		chars = []rune(CharsetUpper + CharsetLower + CharsetDigit + CharsetSymbol)
 	default:
 		chars = []rune(CharsetUpper + CharsetLower + CharsetDigit + CharsetSymbol)
 	}
