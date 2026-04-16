@@ -49,6 +49,10 @@ var GenerateCmd = &cobra.Command{
 			return err
 		}
 
+		if strategy == "passphrase" && cmd.Flags().Changed("length") == false {
+			length = 4
+		}
+
 		opts := &generator.Options{
 			Length:         length,
 			Charset:        charset,
