@@ -32,7 +32,7 @@ func init() {
 
 	if len(os.Args) > 1 {
 		firstArg := os.Args[1]
-		if firstArg != "generate" && firstArg != "gen" && firstArg != "version" && firstArg != "completion" && firstArg != "-h" && firstArg != "--help" && firstArg != "-v" && firstArg != "--version" {
+		if firstArg != "generate" && firstArg != "gen" && firstArg != "check" && firstArg != "ck" && firstArg != "version" && firstArg != "completion" && firstArg != "-h" && firstArg != "--help" && firstArg != "-v" && firstArg != "--version" {
 			newArgs := make([]string, 0, len(os.Args)+1)
 			newArgs = append(newArgs, os.Args[0])
 			newArgs = append(newArgs, "generate")
@@ -58,6 +58,7 @@ func init() {
 	}
 
 	RootCmd.AddCommand(GenerateCmd)
+	RootCmd.AddCommand(CheckCmd)
 	RootCmd.AddCommand(versionCmd)
 
 	RootCmd.PersistentFlags().StringP("lang", "L", "", i18n.T("flag_lang"))
@@ -73,6 +74,8 @@ func updateCommandStrings() {
 	RootCmd.Long = i18n.T("root_long")
 	GenerateCmd.Short = i18n.T("generate_use")
 	GenerateCmd.Long = i18n.T("generate_long")
+	CheckCmd.Short = i18n.T("check_use")
+	CheckCmd.Long = i18n.T("check_long")
 	versionCmd.Short = i18n.T("version_use")
 }
 

@@ -180,6 +180,53 @@ echo "Generated: $PASSWORD"
 - **Password Manager Master**: 32+ characters
 - **Passphrase**: 4+ words recommended
 
+## Password Strength Check
+
+### Basic Usage
+
+```bash
+# Check single password
+ohmypassword check "myPassword123"
+
+# Check multiple passwords
+ohmypassword check "weak" "StrongP@ssw0rd!" "123456"
+```
+
+### Output Formats
+
+```bash
+# Simple output (default)
+ohmypassword check "password"
+
+# Table output
+ohmypassword check -o table "password"
+
+# JSON output
+ohmypassword check -o json "password"
+
+# CSV output
+ohmypassword check -o csv "password"
+```
+
+### Table Output Example
+
+```
++------------------+-------+-------------+-------------+----------------------+
+| PASSWORD         | SCORE | ENTROPY     | STRENGTH    | ESTIMATED CRACK TIME |
++------------------+-------+-------------+-------------+----------------------+
+| weak             | 1/5   | 37.60 bits  | Weak        | < 1 year             |
++------------------+-------+-------------+-------------+----------------------+
+| StrongP@ssw0rd!  | 5/5   | 127.38 bits | Very Strong | millennia+           |
++------------------+-------+-------------+-------------+----------------------+
+```
+
+### With Suggestions
+
+```bash
+# Check password and get improvement suggestions
+ohmypassword check -o table "short"
+```
+
 ## Troubleshooting
 
 ### "Invalid charset" Error
@@ -220,12 +267,20 @@ export LC_ALL=en_US.UTF-8
 3. **Memory**: Passwords exist only in memory, not written to disk
 4. **Offline**: Tool works completely offline, no network required
 
+## Commands
+
+- `generate` (alias: `gen`) - Generate passwords
+- `check` - Check password strength
+- `version` - Show version information
+- `help` - Show help
+
 ## Getting Help
 
 ```bash
 # Show help
 ohmypassword --help
 ohmypassword generate --help
+ohmypassword check --help
 
 # Show version
 ohmypassword version

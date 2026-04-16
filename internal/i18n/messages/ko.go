@@ -5,6 +5,8 @@ var KO = MessageMap{
 	"root_long":     "암호학적으로 안전한 비밀번호를 쉽게 생성합니다.",
 	"generate_use":  "새 비밀번호 생성",
 	"generate_long": "사용자 정의 옵션으로 안전한 비밀번호를 생성합니다.",
+	"check_use":     "비밀번호 강도 확인",
+	"check_long":    "하나 이상의 비밀번호 강도를 확인합니다.",
 	"version_use":   "버전 정보 표시",
 
 	"flag_length":          "비밀번호 길이 (8-128, 기본값: 16)",

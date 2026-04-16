@@ -48,11 +48,18 @@ ohmypassword generate -v
 
 # Use Chinese language
 ohmypassword generate -L zh
+
+# Check password strength
+ohmypassword check "myPassword123"
+
+# Check multiple passwords
+ohmypassword check "weak" "StrongP@ssw0rd!" "123456"
 ```
 
 ## Commands
 
 - `generate` - Generate passwords (alias: `gen`)
+- `check` - Check password strength
 - `version` - Show version information
 - `help` - Show help information
 
@@ -60,7 +67,7 @@ ohmypassword generate -L zh
 
 - `-l, --length int` - Password length (8-128, default: 16)
 - `-c, --charset string` - Character set (upper/lower/digit/symbol/all, default: all)
-- `-s, --strategy string` - Generation strategy (simple/pronounceable/passphrase, default: simple)
+- `-s, --strategy string` - Generation strategy (simple/pronounceable/passphrase/memorable, default: simple)
 - `-n, --count int` - Number of passwords to generate (1-100, default: 1)
 - `-v, --validate` - Show password strength
 - `-q, --quiet` - Quiet mode (output password only)

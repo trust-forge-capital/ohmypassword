@@ -5,6 +5,8 @@ var FR = MessageMap{
 	"root_long":     "Générez facilement des mots de passe cryptographiquement sécurisés.",
 	"generate_use":  "Générer un nouveau mot de passe",
 	"generate_long": "Générez un mot de passe sécurisé avec des options personnalisables.",
+	"check_use":     "Vérifier la force du mot de passe",
+	"check_long":    "Vérifiez la force d'un ou plusieurs mots de passe.",
 	"version_use":   "Afficher les informations de version",
 
 	"flag_length":          "Longueur du mot de passe (8-128, par défaut: 16)",

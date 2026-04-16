@@ -5,6 +5,8 @@ var ZHTW = MessageMap{
 	"root_long":     "輕鬆產生加密安全的密碼。",
 	"generate_use":  "產生新密碼",
 	"generate_long": "使用可自訂選項產生安全密碼。",
+	"check_use":     "檢查密碼強度",
+	"check_long":    "檢查一個或多個密碼的強度。",
 	"version_use":   "顯示版本資訊",
 
 	"flag_length":          "密碼長度 (8-128, 預設: 16)",

@@ -5,6 +5,8 @@ var ZH = MessageMap{
 	"root_long":     "轻松生成加密安全的密码。",
 	"generate_use":  "生成新密码",
 	"generate_long": "使用可自定义选项生成安全密码。",
+	"check_use":     "检查密码强度",
+	"check_long":    "检查一个或多个密码的强度。",
 	"version_use":   "显示版本信息",
 
 	"flag_length":          "密码长度 (8-128, 默认: 16)",

@@ -7,6 +7,8 @@ var EN = MessageMap{
 	"root_long":     "Generate cryptographically secure passwords with ease.",
 	"generate_use":  "Generate a new password",
 	"generate_long": "Generate a secure password with customizable options.",
+	"check_use":     "Check password strength",
+	"check_long":    "Check the strength of one or more passwords.",
 	"version_use":   "Show version information",
 
 	"flag_length":          "Password length (8-128, default: 16)",
