@@ -8,7 +8,7 @@ export GOROOT=/opt/homebrew/Cellar/go/1.26.2/libexec  # Required on this machine
 make run        # Run CLI (go run ./cmd/ohmypassword)
 make build      # Build to bin/ohmypassword
 make test       # Test with -race flag
-make lint       # golangci-lint (use v1.64.8: curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/HEAD/install.sh | sh -s -- -b /tmp v1.64.8)
+make lint       # golangci-lint v2.x (auto-installed by action in CI)
 make build-all  # Cross-platform builds (linux/darwin/windows, amd64/arm64)
 ```
 
@@ -29,12 +29,14 @@ make build-all  # Cross-platform builds (linux/darwin/windows, amd64/arm64)
 - Release triggers on tag push (`v*`)
 - Workflow: `.github/workflows/release.yml` (lint → test → build → upload assets)
 - Release notes auto-generated; edit manually to avoid duplicates
-- golangci-lint v1.64.8 in CI, v2.x locally - set `verify: false` in workflow
+- **Important**: Use golangci-lint v2.x (both local and CI)
+  - Action: `golangci/golangci-lint-action@v9` with `version: v2.11`
+  - Config: `.golangci.yml` uses v2 format (`version: "2"`, `linters.settings`)
 
 ## Notes
 
 - No config files or env vars - CLI flags only
 - Always use `crypto/rand` (not math/rand)
 - Tests require `-race` flag
-- Lint config: `.golangci.yml` (v1 format, no `version` field)
+- Lint config: `.golangci.yml` (v2 format with `version: "2"`, use `linters.settings` not `linters-settings`)
 - Build target: `./cmd/ohmypassword` (not `./cmd/cli`)
