@@ -51,7 +51,7 @@ func EstimateCrackTime(entropyBits int) string {
 
 	combinations := math.Pow(2, float64(entropyBits))
 
-	for name, rate := range assumptions {
+	for _, rate := range assumptions {
 		seconds := combinations / float64(rate)
 		if seconds < 60 {
 			return "< 1 second"

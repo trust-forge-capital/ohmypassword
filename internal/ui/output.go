@@ -4,15 +4,16 @@ import (
 	"encoding/csv"
 	"encoding/json"
 	"fmt"
+	"os"
 	"strings"
 
 	"github.com/trust-forge-capital/ohmypassword/internal/i18n"
 )
 
 type PasswordResult struct {
-	Password  string
-	Entropy   float64
-	Strength  StrengthInfo
+	Password string
+	Entropy  float64
+	Strength StrengthInfo
 }
 
 type StrengthInfo struct {
@@ -93,7 +94,7 @@ func outputJSON(results []PasswordResult, quiet bool) error {
 }
 
 func outputCSV(results []PasswordResult, quiet bool) error {
-	w := csv.NewWriter(fmt.Stdout)
+	w := csv.NewWriter(os.Stdout)
 	defer w.Flush()
 
 	header := []string{"password"}
