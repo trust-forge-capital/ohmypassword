@@ -4,7 +4,7 @@ const (
 	CharsetUpper  = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	CharsetLower  = "abcdefghijklmnopqrstuvwxyz"
 	CharsetDigit  = "0123456789"
-	CharsetSymbol = "!@#$%^&*()_+-=[]{}|;:,.<>?"
+	CharsetSymbol = "!@#$%^&*()_+-=[]{}|;:,.<>?/~`-\""
 )
 
 var SimilarChars = map[rune]rune{
