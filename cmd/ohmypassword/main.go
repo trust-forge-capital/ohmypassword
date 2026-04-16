@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/trust-forge-capital/ohmypassword/cmd/cli"
+	cli "github.com/trust-forge-capital/ohmypassword/cmd/cli"
 )
 
 func main() {

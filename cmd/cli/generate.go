@@ -1,4 +1,4 @@
-package main
+package cli
 
 import (
 	"fmt"
@@ -10,7 +10,7 @@ import (
 	"github.com/trust-forge-capital/ohmypassword/internal/validator"
 )
 
-var generateCmd = &cobra.Command{
+var GenerateCmd = &cobra.Command{
 	Use:     "generate",
 	Short:   i18n.T("generate_use"),
 	Long:    i18n.T("generate_long"),
@@ -59,13 +59,11 @@ var generateCmd = &cobra.Command{
 }
 
 func init() {
-	generateCmd.Flags().IntP("length", "l", 16, i18n.T("flag_length"))
-	generateCmd.Flags().StringP("charset", "c", "all", i18n.T("flag_charset"))
-	generateCmd.Flags().StringP("strategy", "s", "simple", i18n.T("flag_strategy"))
-	generateCmd.Flags().IntP("count", "n", 1, i18n.T("flag_count"))
-	generateCmd.Flags().BoolP("validate", "v", false, i18n.T("flag_validate"))
-	generateCmd.Flags().BoolP("quiet", "q", false, i18n.T("flag_quiet"))
-	generateCmd.Flags().Bool("exclude-similar", false, i18n.T("flag_exclude_similar"))
-
-	RootCmd.AddCommand(generateCmd)
+	GenerateCmd.Flags().IntP("length", "l", 16, i18n.T("flag_length"))
+	GenerateCmd.Flags().StringP("charset", "c", "all", i18n.T("flag_charset"))
+	GenerateCmd.Flags().StringP("strategy", "s", "simple", i18n.T("flag_strategy"))
+	GenerateCmd.Flags().IntP("count", "n", 1, i18n.T("flag_count"))
+	GenerateCmd.Flags().BoolP("validate", "v", false, i18n.T("flag_validate"))
+	GenerateCmd.Flags().BoolP("quiet", "q", false, i18n.T("flag_quiet"))
+	GenerateCmd.Flags().Bool("exclude-similar", false, i18n.T("flag_exclude_similar"))
 }

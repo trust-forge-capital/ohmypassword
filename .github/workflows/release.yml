@@ -51,7 +51,7 @@ jobs:
           CGO_ENABLED: 0
         run: |
           ext="${{ matrix.ext }}"
-          go build -ldflags="-s -w" -o bin/ohmypassword-${GOOS}-${GOARCH}${ext} ./cmd/cli
+          go build -ldflags="-s -w" -o bin/ohmypassword-${GOOS}-${GOARCH}${ext} ./cmd/ohmypassword
 
       - name: Upload release asset
         uses: softprops/action-gh-release@v2

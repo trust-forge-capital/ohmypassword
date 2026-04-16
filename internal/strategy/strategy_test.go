@@ -2,13 +2,11 @@ package strategy
 
 import (
 	"testing"
-
-	"github.com/trust-forge-capital/ohmypassword/internal/generator"
 )
 
 func TestSimpleStrategy_Generate(t *testing.T) {
 	strategy := &SimpleStrategy{}
-	opts := &generator.Options{
+	opts := &Options{
 		Length:  16,
 		Charset: "all",
 	}
@@ -25,7 +23,7 @@ func TestSimpleStrategy_Generate(t *testing.T) {
 
 func TestSimpleStrategy_CalculateEntropy(t *testing.T) {
 	strategy := &SimpleStrategy{}
-	opts := &generator.Options{
+	opts := &Options{
 		Length:  16,
 		Charset: "all",
 	}
@@ -38,7 +36,7 @@ func TestSimpleStrategy_CalculateEntropy(t *testing.T) {
 
 func TestPronounceableStrategy_Generate(t *testing.T) {
 	strategy := NewPronounceableStrategy()
-	opts := &generator.Options{
+	opts := &Options{
 		Length:  10,
 		Charset: "all",
 	}
@@ -55,7 +53,7 @@ func TestPronounceableStrategy_Generate(t *testing.T) {
 
 func TestPassphraseStrategy_Generate(t *testing.T) {
 	strategy := NewPassphraseStrategy()
-	opts := &generator.Options{
+	opts := &Options{
 		Length:  4,
 		Charset: "all",
 	}

@@ -1,4 +1,4 @@
-package main
+package cli
 
 import (
 	"fmt"
@@ -25,7 +25,7 @@ var RootCmd = &cobra.Command{
 }
 
 func init() {
-	RootCmd.AddCommand(generateCmd)
+	RootCmd.AddCommand(GenerateCmd)
 	RootCmd.AddCommand(versionCmd)
 
 	RootCmd.PersistentFlags().StringP("lang", "L", "", i18n.T("flag_lang"))

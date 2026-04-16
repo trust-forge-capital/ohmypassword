@@ -1,21 +1,21 @@
 package strategy
 
 import (
-	"github.com/trust-forge-capital/ohmypassword/internal/generator"
 	"github.com/trust-forge-capital/ohmypassword/internal/random"
+	"github.com/trust-forge-capital/ohmypassword/pkg/charset"
 )
 
 type CustomStrategy struct {
-	rules    []Rule
-	rng      random.RNG
+	rules []Rule
+	rng   random.RNG
 }
 
 type Rule struct {
-	Type      string
-	Charset   string
-	MinCount  int
-	MaxCount  int
-	Position  string
+	Type     string
+	Charset  string
+	MinCount int
+	MaxCount int
+	Position string
 }
 
 func NewCustomStrategy(rules []Rule) *CustomStrategy {
@@ -25,7 +25,7 @@ func NewCustomStrategy(rules []Rule) *CustomStrategy {
 	}
 }
 
-func (s *CustomStrategy) Generate(opts *generator.Options) (string, error) {
+func (s *CustomStrategy) Generate(opts *Options) (string, error) {
 	if len(s.rules) == 0 {
 		simple := &SimpleStrategy{}
 		return simple.Generate(opts)
@@ -34,7 +34,7 @@ func (s *CustomStrategy) Generate(opts *generator.Options) (string, error) {
 	result := make([]rune, 0, opts.Length)
 
 	for _, rule := range s.rules {
-		charset := generator.GetCharset(rule.Charset)
+		chars := charset.GetCharsetRunes(rule.Charset)
 		count := rule.MinCount
 		if rule.MaxCount > rule.MinCount {
 			n, _ := s.rng.Intn(rule.MaxCount - rule.MinCount + 1)
@@ -42,21 +42,21 @@ func (s *CustomStrategy) Generate(opts *generator.Options) (string, error) {
 		}
 
 		for i := 0; i < count && len(result) < opts.Length; i++ {
-			idx, _ := s.rng.Intn(len(charset))
-			result = append(result, charset[idx])
+			idx, _ := s.rng.Intn(len(chars))
+			result = append(result, chars[idx])
 		}
 	}
 
 	for len(result) < opts.Length {
-		charset := generator.GetCharset(opts.Charset)
-		idx, _ := s.rng.Intn(len(charset))
-		result = append(result, charset[idx])
+		chars := charset.GetCharsetRunes(opts.Charset)
+		idx, _ := s.rng.Intn(len(chars))
+		result = append(result, chars[idx])
 	}
 
 	return string(result), nil
 }
 
-func (s *CustomStrategy) CalculateEntropy(opts *generator.Options) float64 {
-	charsetSize := generator.GetCharsetSize(opts.Charset)
-	return generator.CalculateEntropyBits(opts.Length, charsetSize)
+func (s *CustomStrategy) CalculateEntropy(opts *Options) float64 {
+	charsetSize := charset.GetCharsetSize(opts.Charset)
+	return calculateEntropyBits(opts.Length, charsetSize)
 }

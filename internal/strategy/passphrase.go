@@ -4,7 +4,6 @@ import (
 	"math"
 	"strings"
 
-	"github.com/trust-forge-capital/ohmypassword/internal/generator"
 	"github.com/trust-forge-capital/ohmypassword/internal/random"
 )
 
