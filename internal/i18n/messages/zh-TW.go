@@ -9,7 +9,7 @@ var ZHTW = MessageMap{
 
 	"flag_length":          "密碼長度 (8-128, 預設: 16)",
 	"flag_charset":         "字元集 (upper/lower/digit/symbol/all, 預設: all)",
-	"flag_strategy":        "產生策略 (simple/pronounceable/passphrase, 預設: simple)",
+	"flag_strategy":        "產生策略 (simple/pronounceable/passphrase/memorable, 預設: simple)",
 	"flag_count":           "產生密碼數量 (1-100, 預設: 1)",
 	"flag_validate":        "顯示密碼強度",
 	"flag_quiet":           "安靜模式 (僅輸出密碼)",

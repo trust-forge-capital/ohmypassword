@@ -18,6 +18,7 @@ type Strategy interface {
 var _ Strategy = (*SimpleStrategy)(nil)
 var _ Strategy = (*PronounceableStrategy)(nil)
 var _ Strategy = (*PassphraseStrategy)(nil)
+var _ Strategy = (*MemorableStrategy)(nil)
 
 func GetStrategy(name string) Strategy {
 	switch name {
@@ -25,6 +26,8 @@ func GetStrategy(name string) Strategy {
 		return NewPronounceableStrategy()
 	case "passphrase":
 		return NewPassphraseStrategy()
+	case "memorable":
+		return NewMemorableStrategy()
 	default:
 		return &SimpleStrategy{}
 	}

@@ -9,7 +9,7 @@ var ZH = MessageMap{
 
 	"flag_length":          "密码长度 (8-128, 默认: 16)",
 	"flag_charset":         "字符集 (upper/lower/digit/symbol/all, 默认: all)",
-	"flag_strategy":        "生成策略 (simple/pronounceable/passphrase, 默认: simple)",
+	"flag_strategy":        "生成策略 (simple/pronounceable/passphrase/memorable, 默认: simple)",
 	"flag_count":           "生成密码数量 (1-100, 默认: 1)",
 	"flag_validate":        "显示密码强度",
 	"flag_quiet":           "静默模式 (仅输出密码)",

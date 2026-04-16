@@ -49,7 +49,7 @@ var GenerateCmd = &cobra.Command{
 			return err
 		}
 
-		if strategy == "passphrase" && cmd.Flags().Changed("length") == false {
+		if strategy == "passphrase" && !cmd.Flags().Changed("length") {
 			length = 4
 		}
 

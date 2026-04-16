@@ -9,7 +9,7 @@ var FR = MessageMap{
 
 	"flag_length":          "Longueur du mot de passe (8-128, par défaut: 16)",
 	"flag_charset":         "Jeu de caractères (upper/lower/digit/symbol/all, par défaut: all)",
-	"flag_strategy":        "Stratégie de génération (simple/pronounceable/passphrase, par défaut: simple)",
+	"flag_strategy":        "Stratégie de génération (simple/pronounceable/passphrase/memorable, par défaut: simple)",
 	"flag_count":           "Nombre de mots de passe à générer (1-100, par défaut: 1)",
 	"flag_validate":        "Afficher laforce du mot de passe",
 	"flag_quiet":           "Mode silencieux (sortir uniquement le mot de passe)",
