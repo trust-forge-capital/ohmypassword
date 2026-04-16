@@ -1,8 +1,6 @@
 package cli
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 	"github.com/trust-forge-capital/ohmypassword/internal/generator"
 	"github.com/trust-forge-capital/ohmypassword/internal/i18n"
@@ -30,7 +28,7 @@ var GenerateCmd = &cobra.Command{
 			Charset:        charset,
 			Strategy:       strategy,
 			Count:          count,
-			Validate:       validate,
+			ShowStrength:   validate,
 			Quiet:          quiet,
 			ExcludeSimilar: excludeSimilar,
 		}

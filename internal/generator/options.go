@@ -5,7 +5,7 @@ type Options struct {
 	Charset        string
 	Strategy       string
 	Count          int
-	Validate       bool
+	ShowStrength   bool
 	Quiet          bool
 	ExcludeSimilar bool
 }
@@ -20,10 +20,10 @@ func (o *Options) Validate() error {
 	if o.Strategy != "simple" && o.Strategy != "pronounceable" && o.Strategy != "passphrase" {
 		return ErrInvalidStrategy
 	}
-	if o.Charset != "all" && o.Charset != "upper" && o.Charset != "lower" && 
-	   o.Charset != "digit" && o.Charset != "symbol" && 
-	   o.Charset != "upper,lower" && o.Charset != "upper,lower,digit" &&
-	   o.Charset != "upper,lower,digit,symbol" {
+	if o.Charset != "all" && o.Charset != "upper" && o.Charset != "lower" &&
+		o.Charset != "digit" && o.Charset != "symbol" &&
+		o.Charset != "upper,lower" && o.Charset != "upper,lower,digit" &&
+		o.Charset != "upper,lower,digit,symbol" {
 		return ErrInvalidCharset
 	}
 	return nil

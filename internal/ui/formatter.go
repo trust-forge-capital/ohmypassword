@@ -1,5 +1,10 @@
 package ui
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 type Formatter interface {
 	Format(results []PasswordResult, quiet bool) (string, error)
 }

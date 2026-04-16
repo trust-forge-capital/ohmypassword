@@ -20,7 +20,7 @@ func GeneratePasswords(opts *Options) ([]string, error) {
 		Charset:        opts.Charset,
 		Strategy:       opts.Strategy,
 		Count:          opts.Count,
-		Validate:       opts.Validate,
+		Validate:       opts.ShowStrength,
 		Quiet:          opts.Quiet,
 		ExcludeSimilar: opts.ExcludeSimilar,
 	}
