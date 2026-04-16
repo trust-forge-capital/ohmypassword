@@ -10,8 +10,6 @@ linters:
     - ineffassign
     - staticcheck
     - unused
-  exclusions:
-    generated: lax
 
 linters-settings:
   errcheck:
