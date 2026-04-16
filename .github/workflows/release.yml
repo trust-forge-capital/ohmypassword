@@ -107,5 +107,4 @@ jobs:
       - name: Run golangci-lint
         uses: golangci/golangci-lint-action@v6
         with:
-          version: latest
-          verify: false
+          version: v2
