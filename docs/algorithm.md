@@ -23,17 +23,19 @@ type RNG interface {
 
 ### Intn Algorithm
 
+Uses rejection sampling to eliminate modulo bias.
+
 For small n (≤ 2^31-1):
-1. Read 4 random bytes
-2. Convert to uint32
-3. Apply modulo: `value % n`
+1. Compute rejection limit: `2^32 - (2^32 % n)`
+2. Read 4 random bytes and convert to uint32
+3. If value ≥ limit, reject and repeat
+4. Return `value % n`
 
 For large n (> 2^31-1):
-1. Read 8 random bytes  
-2. Convert to uint64
-3. Apply modulo: `value % n`
-
-This approach avoids modulo bias.
+1. Compute rejection limit: `2^64 - (2^64 % n)`
+2. Read 8 random bytes and convert to uint64
+3. If value ≥ limit, reject and repeat
+4. Return `value % n`
 
 ## Entropy Calculation
 
@@ -113,7 +115,23 @@ Crack time = 2^entropy / attempts_per_second
 3. Append digit and symbol
 4. Example: `dragon-forest-thunder-42!`
 
-Word list contains 50 common English words for variety.
+Word list contains 777 common English words for variety.
+
+### Memorable Strategy
+
+1. Generates CVC (consonant-vowel-consonant) patterns
+2. Creates human-memorable syllables
+3. Joins multiple syllables with separator (-)
+4. Appends digit and symbol for complexity
+5. Example: `xob-ube-fim2!`
+
+### Segmented Strategy
+
+1. Generates random characters from selected charset
+2. Splits result into 3-character segments
+3. Joins segments with hyphen separator
+4. Length rounds up to nearest multiple of 3
+5. Example: `htV-jQ4-A9s-hbY`
 
 ## Character Sets
 

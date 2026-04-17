@@ -47,7 +47,10 @@ ohmypassword generate -n 10
 ohmypassword generate -o json
 
 # Show password strength
-ohmypassword generate -v
+ohmypassword generate -V
+
+# Exclude similar characters
+ohmypassword generate --exclude-similar
 
 # Use Chinese language
 ohmypassword generate -L zh
@@ -62,8 +65,8 @@ ohmypassword check "weak" "StrongP@ssw0rd!" "123456"
 ## Commands
 
 - `generate` - Generate passwords (alias: `gen`)
-- `check` - Check password strength
-- `version` - Show version information
+- `check` - Check password strength (alias: `ck`)
+- `version` - Show version information (alias: `-v`, `--version` at root)
 - `help` - Show help information
 
 ## Options
@@ -72,11 +75,12 @@ ohmypassword check "weak" "StrongP@ssw0rd!" "123456"
 - `-c, --charset string` - Character set (upper/lower/digit/symbol/all, default: all)
 - `-s, --strategy string` - Generation strategy (simple/pronounceable/passphrase/memorable/segmented, default: simple)
 - `-n, --count int` - Number of passwords to generate (1-100, default: 1)
-- `-v, --validate` - Show password strength
+- `-V, --validate` - Show password strength
 - `-q, --quiet` - Quiet mode (output password only)
+- `--exclude-similar` - Exclude similar characters (0, O, 1, l, I, |)
 - `-L, --lang string` - Language (en/zh/zh-TW/ja/ko/es/fr, default: en)
 - `-o, --output string` - Output format (simple/json/csv/table, default: simple)
-- `--version` - Show version
+- `-v, --version` - Show version
 - `-h, --help` - Show help
 
 ## License

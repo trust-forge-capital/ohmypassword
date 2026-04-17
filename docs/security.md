@@ -101,7 +101,16 @@ Entropy (in bits) = length × log2(charset_size)
 
 - **simple**: Maximum entropy, hard to remember
 - **pronounceable**: Balance of security and memorability
-- **passphrase**: Best memorability, acceptable security with 4+ words
+- **passphrase**: Best memorability, acceptable security with 4+ words (777-word list)
+- **memorable**: CVC-pattern passwords, easy to recall with good entropy
+- **segmented**: Product-key style, human-readable with high entropy
+
+### Similar Character Exclusion
+
+The `--exclude-similar` flag removes visually ambiguous characters:
+- Excluded: `0`, `O`, `1`, `l`, `I`, `|`
+- Reduces charset size slightly but improves readability
+- Recommended when passwords are read aloud or transcribed by hand
 
 ## Compliance
 

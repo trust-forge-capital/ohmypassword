@@ -65,6 +65,9 @@ ohmypassword generate --count 10
 # Show password strength
 ohmypassword generate -V
 ohmypassword generate --validate
+
+# Exclude similar characters
+ohmypassword generate --exclude-similar
 ```
 
 ### Output Formats
@@ -121,6 +124,15 @@ ohmypassword generate -s pronounceable
 # Output: xK9mP2nL5!
 ```
 
+### Memorable
+
+CVC-pattern memorable passwords that are easier to recall while maintaining good entropy:
+
+```bash
+ohmypassword generate -s memorable
+# Output: xob-ube-fim2!
+```
+
 ### Passphrase
 
 Word-based passwords (specify word count with -l):
@@ -149,7 +161,7 @@ ohmypassword generate -s segmented -l 15
 
 ```bash
 # 24 chars, all character types, show strength
-ohmypassword generate -l 24 -c all -v
+ohmypassword generate -l 24 -c all -V
 ```
 
 ### Generate PIN Code

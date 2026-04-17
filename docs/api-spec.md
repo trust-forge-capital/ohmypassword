@@ -12,7 +12,7 @@ ohmypassword [global options] <command> [subcommand] [options]
 |------|-------|------|---------|-------------|
 | `--lang` | `-L` | string | `en` | Language (en/zh/zh-TW/ja/ko/es/fr) |
 | `--output` | `-o` | string | `simple` | Output format (simple/json/csv/table) |
-| `--version` | | bool | false | Show version |
+| `--version` | `-v` | bool | false | Show version |
 | `--help` | `-h` | bool | false | Show help |
 
 ## Commands
@@ -100,7 +100,7 @@ Default:
 ]
 ```
 
-With validation (`-v`):
+With validation (`-V`):
 ```json
 [
   {
@@ -123,7 +123,7 @@ password
 aB3$kL9@mN2pQ
 ```
 
-With validation (`-v`):
+With validation (`-V`):
 ```
 password,entropy,strength,crack_time
 aB3$kL9@mN2pQ,95.27,Strong,centuries
@@ -136,7 +136,7 @@ Default:
 aB3$kL9@mN2pQ
 ```
 
-With validation (`-v`):
+With validation (`-V`):
 ```
 PASSWORD                     ENTROPY         STRENGTH     CRACK_TIME
 -----------------------------------------------------------------------------
@@ -193,5 +193,5 @@ ohmypassword generate -o json
 ohmypassword generate -L zh
 
 # All options combined
-ohmypassword generate -l 32 -c all -s simple -n 10 -v -o json
+ohmypassword generate -l 32 -c all -s simple -n 10 -V -o json
 ```
