@@ -6,7 +6,7 @@ const (
 	CharsetUpper  = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	CharsetLower  = "abcdefghijklmnopqrstuvwxyz"
 	CharsetDigit  = "0123456789"
-	CharsetSymbol = "!@#$%^&*()_+-=[]{}|;:,.<>?/~`-\"'"
+	CharsetSymbol = "!@#$%^&*()_+-=[]{}|;:,.<>?/~`\"'"
 )
 
 var SimilarChars = map[rune]rune{
@@ -121,6 +121,16 @@ func GetCharsetRunes(charset string) []rune {
 
 func GetCharsetSize(charset string) int {
 	return len(GetCharsetRunes(charset))
+}
+
+func IsValidCharset(charset string) bool {
+	switch charset {
+	case "upper", "lower", "digit", "lower,digit", "symbol",
+		"upper,lower", "upper,lower,digit", "upper,lower,digit,symbol", "all":
+		return true
+	default:
+		return false
+	}
 }
 
 func ExcludeSimilarChars(chars []rune) []rune {

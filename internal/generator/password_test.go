@@ -137,8 +137,8 @@ func TestGetCharsetRunes(t *testing.T) {
 		{"upper", "upper", 26, "A"},
 		{"lower", "lower", 26, "a"},
 		{"digit", "digit", 10, "5"},
-		{"symbol", "symbol", 32, "!"},
-		{"all", "all", 94, "A"},
+		{"symbol", "symbol", 31, "!"},
+		{"all", "all", 93, "A"},
 	}
 
 	for _, tt := range tests {
@@ -171,7 +171,7 @@ func TestExcludeSimilarChars(t *testing.T) {
 		{
 			name:       "exclude similar from all",
 			charset:    []rune(charset.CharsetUpper + charset.CharsetLower + charset.CharsetDigit + charset.CharsetSymbol),
-			wantSize:   88,
+			wantSize:   87,
 			shouldMiss: "0",
 		},
 	}

@@ -9,14 +9,12 @@ import (
 	"github.com/mattn/go-runewidth"
 )
 
-var (
-	spinnerChars = []string{"⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"}
-	spinnerIndex = 0
-)
+var spinnerChars = []string{"⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"}
 
 type Spinner struct {
-	message string
-	stopped bool
+	message      string
+	stopped      bool
+	spinnerIndex int
 }
 
 func NewSpinner(message string) *Spinner {
@@ -26,8 +24,8 @@ func NewSpinner(message string) *Spinner {
 func (s *Spinner) Start() {
 	go func() {
 		for !s.stopped {
-			fmt.Printf("\r%s %s", spinnerChars[spinnerIndex], s.message)
-			spinnerIndex = (spinnerIndex + 1) % len(spinnerChars)
+			fmt.Printf("\r%s %s", spinnerChars[s.spinnerIndex], s.message)
+			s.spinnerIndex = (s.spinnerIndex + 1) % len(spinnerChars)
 			time.Sleep(100 * time.Millisecond)
 		}
 	}()

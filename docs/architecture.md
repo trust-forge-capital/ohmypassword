@@ -32,8 +32,10 @@ ohmypassword is a CLI password generator that creates cryptographically secure p
 
 ### cmd/cli
 - **main.go**: Application entry point
-- **root.go**: Root command definition with global flags
+- **root.go**: Root command definition with global flags; rewrites bare positional args to default to `generate`
 - **generate.go**: Password generation command
+- **check.go**: Password strength check command
+- **version.go**: Version command
 
 ### internal/generator
 Core password generation logic:
@@ -41,6 +43,7 @@ Core password generation logic:
 - **options.go**: Configuration options validation
 - **entropy.go**: Entropy calculation
 - **types.go**: Type definitions
+- **errors.go**: Shared error definitions
 
 ### internal/random
 Cryptographically secure random number generation:
@@ -55,6 +58,7 @@ Generation strategies:
 - **passphrase.go**: Word-based passwords
 - **memorable.go**: CVC-pattern memorable passwords
 - **segmented.go**: Hyphen-delimited segment passwords
+- **custom.go**: Rule-based generation for programmatic use
 
 ### internal/validator
 Password strength analysis:
@@ -73,7 +77,7 @@ Output formatting:
 
 ### pkg/charset
 Public character set library:
-- **charset.go**: Charset interface and implementations
+- **charset.go**: Charset constants, rune builders, and validation
 - **sets.go**: Predefined charset sets
 
 ## Data Flow
@@ -83,7 +87,9 @@ User Input → CLI Flags → Options → Generator → Strategy → Random → P
                                           ↓
                                     Entropy Calc
                                           ↓
-Password → Validator (optional) → Output Formatter → Terminal
+Password → Validator → Output Formatter → Terminal
+
+Check Input → CLI Flags → Validator → Strength Report → Output Formatter → Terminal
 ```
 
 ## Security Model

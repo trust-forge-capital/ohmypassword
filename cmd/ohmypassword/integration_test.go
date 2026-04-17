@@ -144,7 +144,7 @@ func TestCLI_Integration(t *testing.T) {
 		},
 		{
 			name: "validate flag",
-			args: []string{"generate", "-v"},
+			args: []string{"generate", "-V"},
 			check: func(output string) error {
 				if !strings.Contains(output, "Entropy:") {
 					t.Log("Output should contain Entropy")

@@ -55,6 +55,26 @@ Combined example: `upper,lower,digit`
 - `passphrase` - Word-based passwords (e.g., dragon-forest-thunder)
 - `memorable` - CVC-pattern memorable passwords
 - `segmented` - Hyphen-delimited 3-character segments (e.g., htV-jQ4-A9s-hbY)
+- `custom` - Rule-based generation (programmatic API only)
+
+### check (ck)
+
+Check password strength.
+
+```
+ohmypassword check [options] <password> [password2 ...]
+ohmypassword ck [options] <password> [password2 ...]
+```
+
+#### Options
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `--output` | `-o` | string | `simple` | Output format (simple/json/csv/table) |
+
+#### Output
+
+Simple output includes score, entropy, strength level, crack time estimate, and improvement suggestions.
 
 ### version
 

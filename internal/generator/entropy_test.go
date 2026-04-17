@@ -14,10 +14,10 @@ func TestCalculateEntropy(t *testing.T) {
 		tolerance   float64
 	}{
 		{
-			name:        "16 chars all charset (94)",
+			name:        "16 chars all charset (93)",
 			password:    "abcdefghijklmnop",
-			charsetSize: 94,
-			wantEntropy: 104.9,
+			charsetSize: 93,
+			wantEntropy: 104.6,
 			tolerance:   1.0,
 		},
 		{
@@ -35,17 +35,17 @@ func TestCalculateEntropy(t *testing.T) {
 			tolerance:   1.0,
 		},
 		{
-			name:        "8 chars all (94)",
+			name:        "8 chars all (93)",
 			password:    "abcdefgh",
-			charsetSize: 94,
-			wantEntropy: 51.9,
+			charsetSize: 93,
+			wantEntropy: 52.3,
 			tolerance:   1.0,
 		},
 		{
-			name:        "32 chars all (94)",
+			name:        "32 chars all (93)",
 			password:    "abcdefghijklmnopqrstuvwxyz012345",
-			charsetSize: 94,
-			wantEntropy: 209.7,
+			charsetSize: 93,
+			wantEntropy: 209.3,
 			tolerance:   1.0,
 		},
 		{
@@ -99,7 +99,7 @@ func TestCalculateEntropyBits(t *testing.T) {
 		{
 			name:        "16 chars all",
 			length:      16,
-			charsetSize: 94,
+			charsetSize: 93,
 			wantBits:    104,
 		},
 		{

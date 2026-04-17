@@ -1,5 +1,7 @@
 package generator
 
+import "github.com/trust-forge-capital/ohmypassword/pkg/charset"
+
 type Options struct {
 	Length         int
 	Charset        string
@@ -26,10 +28,7 @@ func (o *Options) Validate() error {
 	if o.Strategy != "simple" && o.Strategy != "pronounceable" && o.Strategy != "passphrase" && o.Strategy != "memorable" && o.Strategy != "segmented" {
 		return ErrInvalidStrategy
 	}
-	if o.Charset != "all" && o.Charset != "upper" && o.Charset != "lower" &&
-		o.Charset != "digit" && o.Charset != "symbol" &&
-		o.Charset != "upper,lower" && o.Charset != "upper,lower,digit" &&
-		o.Charset != "upper,lower,digit,symbol" {
+	if !charset.IsValidCharset(o.Charset) {
 		return ErrInvalidCharset
 	}
 	return nil

@@ -52,9 +52,9 @@ Entropy (bits) = length × log2(charset_size)
 | 8 | 26 | 37.6 |
 | 8 | 36 | 41.4 |
 | 8 | 62 | 47.6 |
-| 8 | 94 | 51.9 |
-| 16 | 94 | 103.8 |
-| 32 | 94 | 207.6 |
+| 8 | 93 | 52.3 |
+| 16 | 93 | 104.6 |
+| 32 | 93 | 209.3 |
 
 ### Implementation
 
@@ -142,8 +142,8 @@ Word list contains 777 common English words for variety.
 | upper | A-Z | 26 |
 | lower | a-z | 26 |
 | digit | 0-9 | 10 |
-| symbol | !@#$%^&*()_+-=[]{}|;:,.<>? | 32 |
-| all | All above combined | 94 |
+| symbol | !@#$%^&*()_+-=[]{}|;:,.<>?/~`"' | 31 |
+| all | All above combined | 93 |
 
 ### Similar Character Exclusion
 
