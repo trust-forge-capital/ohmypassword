@@ -56,6 +56,10 @@ var GenerateCmd = &cobra.Command{
 			length = 12
 		}
 
+		if output == "json" || output == "csv" || output == "table" {
+			validate = true
+		}
+
 		opts := &generator.Options{
 			Length:         length,
 			Charset:        charset,

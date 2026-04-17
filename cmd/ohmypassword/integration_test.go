@@ -169,7 +169,7 @@ func TestCLI_Integration(t *testing.T) {
 		},
 		{
 			name: "output json",
-			args: []string{"generate", "-v", "-o", "json"},
+			args: []string{"generate", "-o", "json"},
 			check: func(output string) error {
 				var result []map[string]interface{}
 				if err := json.Unmarshal([]byte(output), &result); err != nil {
@@ -178,13 +178,20 @@ func TestCLI_Integration(t *testing.T) {
 				if len(result) == 0 {
 					t.Log("JSON should have at least one result")
 				}
+				first := result[0]
+				if _, ok := first["entropy"]; !ok {
+					t.Log("JSON should contain entropy by default for structured formats")
+				}
+				if _, ok := first["strength"]; !ok {
+					t.Log("JSON should contain strength by default for structured formats")
+				}
 				return nil
 			},
 			wantErr: false,
 		},
 		{
 			name: "output csv header",
-			args: []string{"generate", "-v", "-o", "csv"},
+			args: []string{"generate", "-o", "csv"},
 			check: func(output string) error {
 				reader := csv.NewReader(strings.NewReader(output))
 				records, err := reader.ReadAll()
@@ -194,16 +201,23 @@ func TestCLI_Integration(t *testing.T) {
 				if len(records) == 0 {
 					t.Log("CSV should have records")
 				}
+				header := records[0]
+				if len(header) < 4 {
+					t.Log("CSV header should include entropy, strength, crack_time columns")
+				}
 				return nil
 			},
 			wantErr: false,
 		},
 		{
 			name: "output table",
-			args: []string{"generate", "-v", "-o", "table"},
+			args: []string{"generate", "-o", "table"},
 			check: func(output string) error {
 				if !strings.Contains(output, "PASSWORD") {
 					t.Log("Table should have PASSWORD header")
+				}
+				if !strings.Contains(output, "ENTROPY") {
+					t.Log("Table should have ENTROPY header")
 				}
 				return nil
 			},

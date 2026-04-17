@@ -73,16 +73,16 @@ ohmypassword generate --exclude-similar
 ### Output Formats
 
 ```bash
-# Simple (default)
+# Simple (default) - password only
 ohmypassword generate -o simple
 
-# JSON (for scripting)
+# JSON (for scripting) - includes strength by default
 ohmypassword generate -o json
 
-# CSV
+# CSV - includes strength by default
 ohmypassword generate -o csv
 
-# Table
+# Table - includes strength by default
 ohmypassword generate -o table
 ```
 

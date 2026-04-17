@@ -91,16 +91,8 @@ Password: aB3$kL9@mN2pQ
 
 ### json
 
-Default:
-```json
-[
-  {
-    "password": "aB3$kL9@mN2pQ"
-  }
-]
-```
+Structured output always includes strength information by default:
 
-With validation (`-V`):
 ```json
 [
   {
@@ -117,13 +109,8 @@ With validation (`-V`):
 
 ### csv
 
-Default:
-```
-password
-aB3$kL9@mN2pQ
-```
+Structured output always includes strength information by default:
 
-With validation (`-V`):
 ```
 password,entropy,strength,crack_time
 aB3$kL9@mN2pQ,95.27,Strong,centuries
@@ -131,12 +118,8 @@ aB3$kL9@mN2pQ,95.27,Strong,centuries
 
 ### table
 
-Default:
-```
-aB3$kL9@mN2pQ
-```
+Structured output always includes strength information by default:
 
-With validation (`-V`):
 ```
 PASSWORD                     ENTROPY         STRENGTH     CRACK_TIME
 -----------------------------------------------------------------------------
@@ -183,15 +166,15 @@ ohmypassword generate -s passphrase -l 4
 # Generate segmented password
 ohmypassword generate -s segmented
 
-# Show password strength
+# Show password strength (simple output)
 ohmypassword generate -V
 
-# Output as JSON
+# Output as JSON (includes strength by default)
 ohmypassword generate -o json
 
 # Use Chinese language
 ohmypassword generate -L zh
 
 # All options combined
-ohmypassword generate -l 32 -c all -s simple -n 10 -V -o json
+ohmypassword generate -l 32 -c all -s simple -n 10 -o json
 ```

@@ -47,11 +47,11 @@ func Output(results []PasswordResult, format string, quiet bool) error {
 
 	switch format {
 	case "json":
-		return outputJSON(results, quiet, hasDetails)
+		return outputJSON(results, quiet)
 	case "csv":
-		return outputCSV(results, quiet, hasDetails)
+		return outputCSV(results, quiet)
 	case "table":
-		return outputTable(results, quiet, hasDetails)
+		return outputTable(results, quiet)
 	default:
 		return outputSimple(results, quiet, hasDetails)
 	}
@@ -85,7 +85,7 @@ func outputSimple(results []PasswordResult, quiet bool, hasDetails bool) error {
 	return nil
 }
 
-func outputJSON(results []PasswordResult, quiet bool, hasDetails bool) error {
+func outputJSON(results []PasswordResult, quiet bool) error {
 	if quiet {
 		for _, r := range results {
 			fmt.Println(r.Password)
@@ -131,7 +131,7 @@ func outputJSON(results []PasswordResult, quiet bool, hasDetails bool) error {
 	return nil
 }
 
-func outputCSV(results []PasswordResult, quiet bool, hasDetails bool) error {
+func outputCSV(results []PasswordResult, quiet bool) error {
 	if quiet {
 		for _, r := range results {
 			fmt.Println(r.Password)
@@ -142,27 +142,22 @@ func outputCSV(results []PasswordResult, quiet bool, hasDetails bool) error {
 	w := csv.NewWriter(os.Stdout)
 	defer w.Flush()
 
-	header := []string{"password"}
-	if !quiet && hasDetails {
-		header = append(header, "entropy", "strength", "crack_time")
-	}
+	header := []string{"password", "entropy", "strength", "crack_time"}
 	if err := w.Write(header); err != nil {
 		return err
 	}
 
 	for _, r := range results {
 		row := []string{r.Password}
-		if !quiet && hasDetails {
-			if r.Entropy > 0 {
-				row = append(row, fmt.Sprintf("%.2f", r.Entropy))
-			} else {
-				row = append(row, "")
-			}
-			if r.Strength.Level != "" {
-				row = append(row, r.Strength.Level, r.Strength.CrackTime)
-			} else {
-				row = append(row, "", "")
-			}
+		if r.Entropy > 0 {
+			row = append(row, fmt.Sprintf("%.2f", r.Entropy))
+		} else {
+			row = append(row, "")
+		}
+		if r.Strength.Level != "" {
+			row = append(row, r.Strength.Level, r.Strength.CrackTime)
+		} else {
+			row = append(row, "", "")
 		}
 		if err := w.Write(row); err != nil {
 			return err
@@ -171,8 +166,8 @@ func outputCSV(results []PasswordResult, quiet bool, hasDetails bool) error {
 	return nil
 }
 
-func outputTable(results []PasswordResult, quiet bool, hasDetails bool) error {
-	if quiet || !hasDetails {
+func outputTable(results []PasswordResult, quiet bool) error {
+	if quiet {
 		for _, r := range results {
 			fmt.Println(r.Password)
 		}

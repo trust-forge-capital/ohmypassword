@@ -43,10 +43,10 @@ ohmypassword generate -s segmented
 # Generate multiple passwords
 ohmypassword generate -n 10
 
-# Output in JSON format
+# Output in JSON format (includes strength by default)
 ohmypassword generate -o json
 
-# Show password strength
+# Show password strength (simple output)
 ohmypassword generate -V
 
 # Exclude similar characters
@@ -75,7 +75,7 @@ ohmypassword check "weak" "StrongP@ssw0rd!" "123456"
 - `-c, --charset string` - Character set (upper/lower/digit/symbol/all, default: all)
 - `-s, --strategy string` - Generation strategy (simple/pronounceable/passphrase/memorable/segmented, default: simple)
 - `-n, --count int` - Number of passwords to generate (1-100, default: 1)
-- `-V, --validate` - Show password strength
+- `-V, --validate` - Show password strength (applies to simple output; json/csv/table always include it)
 - `-q, --quiet` - Quiet mode (output password only)
 - `--exclude-similar` - Exclude similar characters (0, O, 1, l, I, |)
 - `-L, --lang string` - Language (en/zh/zh-TW/ja/ko/es/fr, default: en)
