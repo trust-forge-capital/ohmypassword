@@ -30,27 +30,42 @@ func (r *CryptoRNG) Intn(n int) (int, error) {
 }
 
 func (r *CryptoRNG) intn31(n int) (int, error) {
-	var b [4]byte
-	_, err := io.ReadFull(r.reader, b[:])
-	if err != nil {
-		return 0, err
-	}
+	nn := uint32(n)
+	max := uint64(1) << 32
+	limit := max - (max % uint64(nn))
 
-	v := binary.BigEndian.Uint32(b[:])
-	v = v % uint32(n)
-	return int(v), nil
+	var b [4]byte
+	for {
+		_, err := io.ReadFull(r.reader, b[:])
+		if err != nil {
+			return 0, err
+		}
+
+		v := uint64(binary.BigEndian.Uint32(b[:]))
+		if v >= limit {
+			continue
+		}
+		return int(v % uint64(nn)), nil
+	}
 }
 
 func (r *CryptoRNG) intnLarge(n int) (int, error) {
-	var b [8]byte
-	_, err := io.ReadFull(r.reader, b[:])
-	if err != nil {
-		return 0, err
-	}
+	nn := uint64(n)
+	limit := ^uint64(0) - (^uint64(0) % nn)
 
-	v := binary.BigEndian.Uint64(b[:])
-	v = v % uint64(n)
-	return int(v), nil
+	var b [8]byte
+	for {
+		_, err := io.ReadFull(r.reader, b[:])
+		if err != nil {
+			return 0, err
+		}
+
+		v := binary.BigEndian.Uint64(b[:])
+		if v >= limit {
+			continue
+		}
+		return int(v % nn), nil
+	}
 }
 
 func (r *CryptoRNG) Uint64() (uint64, error) {

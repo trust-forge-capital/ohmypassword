@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/trust-forge-capital/ohmypassword/internal/generator"
+	"github.com/trust-forge-capital/ohmypassword/pkg/charset"
 )
 
 type Validator interface {
@@ -19,8 +20,8 @@ type StrengthResult struct {
 	Suggestions []string
 }
 
-func CalculateStrength(password string, charset string) StrengthResult {
-	charsetSize := generator.GetCharsetSize(charset)
+func CalculateStrength(password string, charsetName string) StrengthResult {
+	charsetSize := charset.GetCharsetSize(charsetName)
 	entropy := generator.CalculateEntropy(password, charsetSize)
 	entropyBits := int(entropy)
 

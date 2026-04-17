@@ -1,10 +1,12 @@
 package charset
 
+import "strings"
+
 const (
 	CharsetUpper  = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	CharsetLower  = "abcdefghijklmnopqrstuvwxyz"
 	CharsetDigit  = "0123456789"
-	CharsetSymbol = "!@#$%^&*()_+-=[]{}|;:,.<>?/~`-\""
+	CharsetSymbol = "!@#$%^&*()_+-=[]{}|;:,.<>?/~`-\"'"
 )
 
 var SimilarChars = map[rune]rune{
@@ -46,32 +48,32 @@ func (c *BaseCharset) Contains(r rune) bool {
 type UpperCharset struct{ *BaseCharset }
 
 func NewUpperCharset() *UpperCharset {
-	return &UpperCharset{&BaseCharset{chars: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"}}
+	return &UpperCharset{&BaseCharset{chars: CharsetUpper}}
 }
 
 type LowerCharset struct{ *BaseCharset }
 
 func NewLowerCharset() *LowerCharset {
-	return &LowerCharset{&BaseCharset{chars: "abcdefghijklmnopqrstuvwxyz"}}
+	return &LowerCharset{&BaseCharset{chars: CharsetLower}}
 }
 
 type DigitCharset struct{ *BaseCharset }
 
 func NewDigitCharset() *DigitCharset {
-	return &DigitCharset{&BaseCharset{chars: "0123456789"}}
+	return &DigitCharset{&BaseCharset{chars: CharsetDigit}}
 }
 
 type SymbolCharset struct{ *BaseCharset }
 
 func NewSymbolCharset() *SymbolCharset {
-	return &SymbolCharset{&BaseCharset{chars: "!@#$%^&*()_+-=[]{}|;:,.<>?"}}
+	return &SymbolCharset{&BaseCharset{chars: CharsetSymbol}}
 }
 
 type AllCharset struct{ *BaseCharset }
 
 func NewAllCharset() *AllCharset {
 	return &AllCharset{&BaseCharset{
-		chars: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?",
+		chars: CharsetUpper + CharsetLower + CharsetDigit + CharsetSymbol,
 	}}
 }
 
@@ -131,6 +133,58 @@ func ExcludeSimilarChars(chars []rune) []rune {
 	return result
 }
 
-func GetExcludedSimilarCount() int {
-	return len(SimilarChars) / 2
+func GetExcludedSimilarCount(charset string) int {
+	chars := GetCharsetRunes(charset)
+	seen := make(map[rune]struct{})
+	count := 0
+	for _, c := range chars {
+		if _, ok := SimilarChars[c]; ok {
+			if _, already := seen[c]; !already {
+				seen[c] = struct{}{}
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func DetectCharset(password string) string {
+	hasUpper := false
+	hasLower := false
+	hasDigit := false
+	hasSymbol := false
+
+	for _, r := range password {
+		switch {
+		case r >= 'A' && r <= 'Z':
+			hasUpper = true
+		case r >= 'a' && r <= 'z':
+			hasLower = true
+		case r >= '0' && r <= '9':
+			hasDigit = true
+		default:
+			if strings.ContainsRune(CharsetSymbol, r) {
+				hasSymbol = true
+			}
+		}
+	}
+
+	var parts []string
+	if hasUpper {
+		parts = append(parts, "upper")
+	}
+	if hasLower {
+		parts = append(parts, "lower")
+	}
+	if hasDigit {
+		parts = append(parts, "digit")
+	}
+	if hasSymbol {
+		parts = append(parts, "symbol")
+	}
+
+	if len(parts) == 0 {
+		return "all"
+	}
+	return strings.Join(parts, ",")
 }

@@ -5,6 +5,7 @@ import (
 	"github.com/trust-forge-capital/ohmypassword/internal/i18n"
 	"github.com/trust-forge-capital/ohmypassword/internal/ui"
 	"github.com/trust-forge-capital/ohmypassword/internal/validator"
+	"github.com/trust-forge-capital/ohmypassword/pkg/charset"
 )
 
 var CheckCmd = &cobra.Command{
@@ -21,7 +22,8 @@ var CheckCmd = &cobra.Command{
 
 		results := make([]ui.CheckResult, len(args))
 		for i, password := range args {
-			strength := validator.CalculateStrength(password, "all")
+			 detected := charset.DetectCharset(password)
+			strength := validator.CalculateStrength(password, detected)
 			results[i] = ui.CheckResult{
 				Password: password,
 				Entropy:  strength.Entropy,

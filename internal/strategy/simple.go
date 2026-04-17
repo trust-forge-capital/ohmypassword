@@ -23,7 +23,7 @@ func (s *SimpleStrategy) Generate(opts *Options) (string, error) {
 func (s *SimpleStrategy) CalculateEntropy(opts *Options) float64 {
 	charsetSize := charset.GetCharsetSize(opts.Charset)
 	if opts.ExcludeSimilar {
-		excluded := charset.GetExcludedSimilarCount()
+		excluded := charset.GetExcludedSimilarCount(opts.Charset)
 		charsetSize -= excluded
 		if charsetSize < 0 {
 			charsetSize = 0

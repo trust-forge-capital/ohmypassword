@@ -79,6 +79,23 @@ func TestPassphraseStrategy_Generate(t *testing.T) {
 	}
 }
 
+func TestMemorableStrategy_Generate(t *testing.T) {
+	strategy := NewMemorableStrategy()
+	opts := &Options{
+		Length:  10,
+		Charset: "all",
+	}
+
+	password, err := strategy.Generate(opts)
+	if err != nil {
+		t.Fatalf("MemorableStrategy.Generate() error = %v", err)
+	}
+
+	if len(password) < 8 {
+		t.Errorf("password length = %v, want >= 8", len(password))
+	}
+}
+
 func TestGetStrategy(t *testing.T) {
 	tests := []struct {
 		name     string
@@ -87,6 +104,7 @@ func TestGetStrategy(t *testing.T) {
 		{"simple", "simple"},
 		{"pronounceable", "pronounceable"},
 		{"passphrase", "passphrase"},
+		{"memorable", "memorable"},
 		{"default", "unknown"},
 	}
 

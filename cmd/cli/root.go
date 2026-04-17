@@ -32,7 +32,7 @@ func init() {
 
 	if len(os.Args) > 1 {
 		firstArg := os.Args[1]
-		if firstArg != "generate" && firstArg != "gen" && firstArg != "check" && firstArg != "ck" && firstArg != "version" && firstArg != "completion" && firstArg != "-h" && firstArg != "--help" && firstArg != "-v" && firstArg != "--version" {
+		if firstArg != "generate" && firstArg != "gen" && firstArg != "check" && firstArg != "ck" && firstArg != "version" && firstArg != "completion" && firstArg != "help" && firstArg != "-h" && firstArg != "--help" && firstArg != "-v" && firstArg != "--version" {
 			newArgs := make([]string, 0, len(os.Args)+1)
 			newArgs = append(newArgs, os.Args[0])
 			newArgs = append(newArgs, "generate")

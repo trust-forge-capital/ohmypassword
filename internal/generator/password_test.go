@@ -2,6 +2,8 @@ package generator
 
 import (
 	"testing"
+
+	"github.com/trust-forge-capital/ohmypassword/pkg/charset"
 )
 
 func TestGeneratePasswords(t *testing.T) {
@@ -125,7 +127,7 @@ func TestOptions_Validate(t *testing.T) {
 	}
 }
 
-func TestGetCharset(t *testing.T) {
+func TestGetCharsetRunes(t *testing.T) {
 	tests := []struct {
 		name         string
 		charset      string
@@ -141,9 +143,9 @@ func TestGetCharset(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			chars := GetCharset(tt.charset)
+			chars := charset.GetCharsetRunes(tt.charset)
 			if len(chars) != tt.wantSize {
-				t.Errorf("GetCharset() size = %v, want %v", len(chars), tt.wantSize)
+				t.Errorf("GetCharsetRunes() size = %v, want %v", len(chars), tt.wantSize)
 			}
 			found := false
 			for _, c := range chars {
@@ -153,7 +155,7 @@ func TestGetCharset(t *testing.T) {
 				}
 			}
 			if !found {
-				t.Errorf("GetCharset() does not contain %v", tt.wantContains)
+				t.Errorf("GetCharsetRunes() does not contain %v", tt.wantContains)
 			}
 		})
 	}
@@ -168,7 +170,7 @@ func TestExcludeSimilarChars(t *testing.T) {
 	}{
 		{
 			name:       "exclude similar from all",
-			charset:    []rune(CharsetUpper + CharsetLower + CharsetDigit + CharsetSymbol),
+			charset:    []rune(charset.CharsetUpper + charset.CharsetLower + charset.CharsetDigit + charset.CharsetSymbol),
 			wantSize:   88,
 			shouldMiss: "0",
 		},
@@ -176,7 +178,7 @@ func TestExcludeSimilarChars(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			result := ExcludeSimilarChars(tt.charset)
+			result := charset.ExcludeSimilarChars(tt.charset)
 			if len(result) != tt.wantSize {
 				t.Errorf("ExcludeSimilarChars() size = %v, want %v", len(result), tt.wantSize)
 			}

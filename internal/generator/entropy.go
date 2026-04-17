@@ -2,7 +2,6 @@ package generator
 
 import (
 	"math"
-	"math/bits"
 )
 
 func CalculateEntropy(password string, charsetSize int) float64 {
@@ -97,11 +96,4 @@ func formatDays(days int) string {
 	default:
 		return formatYears(days / 365)
 	}
-}
-
-func LeadingZeros(n uint64) int {
-	if n == 0 {
-		return bits.UintSize
-	}
-	return bits.LeadingZeros64(n)
 }

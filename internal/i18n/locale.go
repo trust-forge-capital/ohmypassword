@@ -43,13 +43,13 @@ func SetLanguage(lang string) {
 
 func detectSystemLanguage() string {
 	lang := os.Getenv("LANG")
-	if lang == "" {
+	if len(lang) < 2 {
 		return "en"
 	}
 
 	lang = lang[:2]
 	if lang == "zh" {
-		lang = "zh"
+		return "zh"
 	}
 
 	return lang
