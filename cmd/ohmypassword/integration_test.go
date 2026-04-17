@@ -120,6 +120,17 @@ func TestCLI_Integration(t *testing.T) {
 			wantErr: false,
 		},
 		{
+			name: "strategy segmented",
+			args: []string{"generate", "-s", "segmented"},
+			check: func(output string) error {
+				if !strings.Contains(output, "-") {
+					t.Log("Segmented strategy should contain hyphens")
+				}
+				return nil
+			},
+			wantErr: false,
+		},
+		{
 			name: "count 3",
 			args: []string{"generate", "-n", "3"},
 			check: func(output string) error {

@@ -23,7 +23,7 @@ func (o *Options) Validate() error {
 	if o.Count < 1 || o.Count > 100 {
 		return ErrInvalidCount
 	}
-	if o.Strategy != "simple" && o.Strategy != "pronounceable" && o.Strategy != "passphrase" && o.Strategy != "memorable" {
+	if o.Strategy != "simple" && o.Strategy != "pronounceable" && o.Strategy != "passphrase" && o.Strategy != "memorable" && o.Strategy != "segmented" {
 		return ErrInvalidStrategy
 	}
 	if o.Charset != "all" && o.Charset != "upper" && o.Charset != "lower" &&

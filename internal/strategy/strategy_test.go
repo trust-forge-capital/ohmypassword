@@ -1,6 +1,7 @@
 package strategy
 
 import (
+	"strings"
 	"testing"
 )
 
@@ -96,6 +97,29 @@ func TestMemorableStrategy_Generate(t *testing.T) {
 	}
 }
 
+func TestSegmentedStrategy_Generate(t *testing.T) {
+	strategy := NewSegmentedStrategy()
+	opts := &Options{
+		Length:  12,
+		Charset: "all",
+	}
+
+	password, err := strategy.Generate(opts)
+	if err != nil {
+		t.Fatalf("SegmentedStrategy.Generate() error = %v", err)
+	}
+
+	parts := strings.Split(password, "-")
+	if len(parts) != 4 {
+		t.Errorf("expected 4 segments, got %d", len(parts))
+	}
+	for _, part := range parts {
+		if len(part) != 3 {
+			t.Errorf("expected segment length 3, got %d", len(part))
+		}
+	}
+}
+
 func TestGetStrategy(t *testing.T) {
 	tests := []struct {
 		name     string
@@ -105,6 +129,7 @@ func TestGetStrategy(t *testing.T) {
 		{"pronounceable", "pronounceable"},
 		{"passphrase", "passphrase"},
 		{"memorable", "memorable"},
+		{"segmented", "segmented"},
 		{"default", "unknown"},
 	}
 

@@ -13,7 +13,7 @@ var EN = MessageMap{
 
 	"flag_length":          "Password length (8-128, default: 16)",
 	"flag_charset":         "Character set (upper/lower/digit/symbol/all, default: all)",
-	"flag_strategy":        "Generation strategy (simple/pronounceable/passphrase/memorable, default: simple)",
+	"flag_strategy":        "Generation strategy (simple/pronounceable/passphrase/memorable/segmented, default: simple)",
 	"flag_count":           "Number of passwords to generate (1-100, default: 1)",
 	"flag_validate":        "Show password strength",
 	"flag_quiet":           "Quiet mode (output password only)",

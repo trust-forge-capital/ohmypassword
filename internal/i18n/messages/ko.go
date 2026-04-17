@@ -11,7 +11,7 @@ var KO = MessageMap{
 
 	"flag_length":          "비밀번호 길이 (8-128, 기본값: 16)",
 	"flag_charset":         "문자 집합 (upper/lower/digit/symbol/all, 기본값: all)",
-	"flag_strategy":        "생성 전략 (simple/pronounceable/passphrase/memorable, 기본값: simple)",
+	"flag_strategy":        "생성 전략 (simple/pronounceable/passphrase/memorable/segmented, 기본값: simple)",
 	"flag_count":           "생성할 비밀번호 수 (1-100, 기본값: 1)",
 	"flag_validate":        "비밀번호 강도 표시",
 	"flag_quiet":           "자동 모드 (비밀번호만 출력)",

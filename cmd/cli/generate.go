@@ -52,6 +52,9 @@ var GenerateCmd = &cobra.Command{
 		if strategy == "passphrase" && !cmd.Flags().Changed("length") {
 			length = 4
 		}
+		if strategy == "segmented" && !cmd.Flags().Changed("length") {
+			length = 12
+		}
 
 		opts := &generator.Options{
 			Length:         length,

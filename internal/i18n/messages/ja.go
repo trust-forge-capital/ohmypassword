@@ -11,7 +11,7 @@ var JA = MessageMap{
 
 	"flag_length":          "パスワードの長さ (8-128, デフォルト: 16)",
 	"flag_charset":         "文字セット (upper/lower/digit/symbol/all, デフォルト: all)",
-	"flag_strategy":        "生成戦略 (simple/pronounceable/passphrase/memorable, デフォルト: simple)",
+	"flag_strategy":        "生成戦略 (simple/pronounceable/passphrase/memorable/segmented, デフォルト: simple)",
 	"flag_count":           "生成するパスワードの数 (1-100, デフォルト: 1)",
 	"flag_validate":        "パスワード強度を表示",
 	"flag_quiet":           "Quiet モード (パスワードのみ出力)",
