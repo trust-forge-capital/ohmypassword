@@ -118,7 +118,7 @@ func init() {
 	GenerateCmd.Flags().StringP("charset", "c", "all", i18n.T("flag_charset"))
 	GenerateCmd.Flags().StringP("strategy", "s", "simple", i18n.T("flag_strategy"))
 	GenerateCmd.Flags().IntP("count", "n", 1, i18n.T("flag_count"))
-	GenerateCmd.Flags().BoolP("validate", "v", false, i18n.T("flag_validate"))
+	GenerateCmd.Flags().BoolP("validate", "V", false, i18n.T("flag_validate"))
 	GenerateCmd.Flags().BoolP("quiet", "q", false, i18n.T("flag_quiet"))
 	GenerateCmd.Flags().Bool("exclude-similar", false, i18n.T("flag_exclude_similar"))
 }

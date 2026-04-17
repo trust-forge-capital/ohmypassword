@@ -66,7 +66,8 @@ func init() {
 
 	updateCommandStrings()
 
-	versionCmd.Version = fmt.Sprintf("%s (%s %s)", version, gitCommit, buildTime)
+	RootCmd.Version = fmt.Sprintf("%s (%s %s)", version, gitCommit, buildTime)
+	versionCmd.Version = RootCmd.Version
 }
 
 func updateCommandStrings() {
