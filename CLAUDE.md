@@ -21,8 +21,9 @@ This is a Go CLI built with Cobra. It generates passwords via pluggable strategi
 
 - `cmd/ohmypassword/main.go` — Entry point; delegates to `cmd/cli.RootCmd.Execute()`.
 - `cmd/cli/root.go` — **Important**: rewrites `os.Args` so bare positional arguments default to the `generate` subcommand. For example, `ohmypassword -l 24` becomes `ohmypassword generate -l 24`. It also parses `--lang`/`-L` from raw `os.Args` before Cobra runs so i18n messages are available during flag initialization.
-- `cmd/cli/generate.go` — `generate` command (alias `gen`). Defaults: length 16, charset `all`, strategy `simple`. Passphrase strategy changes the default length to 4 (words) when the user does not explicitly set `-l`.
+- `cmd/cli/generate.go` — `generate` command (alias `gen`). Defaults: length 16, charset `all`, strategy `simple`. Passphrase strategy changes the default length to 4 (words) and segmented to 12 (4 segments of 3 chars) when the user does not explicitly set `-l`.
 - `cmd/cli/check.go` — `check` command (alias `ck`) for checking password strength.
+- **Flags note**: `-v` / `--version` at the root level prints version info (Cobra built-in). `generate --validate` uses short flag `-V` (not `-v`).
 
 ### Password Generation Pipeline
 
@@ -33,6 +34,7 @@ This is a Go CLI built with Cobra. It generates passwords via pluggable strategi
    - `PronounceableStrategy` — alternating consonants and vowels.
    - `PassphraseStrategy` — word-based passphrases.
    - `MemorableStrategy` — CVC-pattern memorable passwords.
+   - `SegmentedStrategy` — hyphen-delimited 3-character segments.
 4. All strategies use `internal/random.CryptoRNG`, which wraps `crypto/rand`. Do not use `math/rand`.
 5. `pkg/charset/` provides rune sets and similar-character exclusion.
 
@@ -40,7 +42,6 @@ This is a Go CLI built with Cobra. It generates passwords via pluggable strategi
 
 - `internal/ui/output.go` handles four output formats: `simple`, `json`, `csv`, `table`.
 - `quiet` mode suppresses metadata and prints only the password.
-- `internal/ui/formatter.go` exists but is largely unused; `output.go` contains the active formatting logic.
 
 ### Validation / Strength Analysis
 

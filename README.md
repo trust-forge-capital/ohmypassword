@@ -5,7 +5,7 @@ A secure, high-entropy password generator CLI tool.
 ## Features
 
 - Cryptographically secure random password generation
-- Multiple generation strategies (simple, memorable, passphrase)
+- Multiple generation strategies (simple, memorable, passphrase, segmented)
 - Multi-language support (EN, ZH, JA, KO, ES, FR)
 - Multiple output formats (simple, JSON, CSV, table)
 - Password strength analysis
@@ -37,6 +37,9 @@ ohmypassword generate -s memorable
 # Generate passphrase
 ohmypassword generate -s passphrase
 
+# Generate segmented password (e.g., htV-jQ4-A9s-hbY)
+ohmypassword generate -s segmented
+
 # Generate multiple passwords
 ohmypassword generate -n 10
 
@@ -67,7 +70,7 @@ ohmypassword check "weak" "StrongP@ssw0rd!" "123456"
 
 - `-l, --length int` - Password length (8-128, default: 16)
 - `-c, --charset string` - Character set (upper/lower/digit/symbol/all, default: all)
-- `-s, --strategy string` - Generation strategy (simple/pronounceable/passphrase/memorable, default: simple)
+- `-s, --strategy string` - Generation strategy (simple/pronounceable/passphrase/memorable/segmented, default: simple)
 - `-n, --count int` - Number of passwords to generate (1-100, default: 1)
 - `-v, --validate` - Show password strength
 - `-q, --quiet` - Quiet mode (output password only)

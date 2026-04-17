@@ -63,7 +63,7 @@ ohmypassword generate -n 5
 ohmypassword generate --count 10
 
 # Show password strength
-ohmypassword generate -v
+ohmypassword generate -V
 ohmypassword generate --validate
 ```
 
@@ -128,6 +128,19 @@ Word-based passwords (specify word count with -l):
 ```bash
 ohmypassword generate -s passphrase -l 4
 # Output: dragon-forest-thunder-42!
+```
+
+### Segmented
+
+Product-key style passwords with 3-character segments separated by hyphens:
+
+```bash
+ohmypassword generate -s segmented
+# Output: htV-jQ4-A9s-hbY
+
+# Custom length (rounds up to nearest multiple of 3)
+ohmypassword generate -s segmented -l 15
+# Output: abc-Def-12g-hIj-3Kl
 ```
 
 ## Use Cases

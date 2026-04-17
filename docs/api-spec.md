@@ -34,7 +34,7 @@ ohmypassword gen [options]
 | `--charset` | `-c` | string | `all` | Character set |
 | `--strategy` | `-s` | string | `simple` | Generation strategy |
 | `--count` | `-n` | int | 1 | Number of passwords |
-| `--validate` | `-v` | bool | false | Show password strength |
+| `--validate` | `-V` | bool | false | Show password strength |
 | `--quiet` | `-q` | bool | false | Quiet mode |
 | `--exclude-similar` | | bool | false | Exclude similar characters (0, O, 1, l, I, \|) |
 
@@ -53,6 +53,8 @@ Combined example: `upper,lower,digit`
 - `simple` - Random character selection (default)
 - `pronounceable` - Human-readable passwords (e.g., xK9mP2)
 - `passphrase` - Word-based passwords (e.g., dragon-forest-thunder)
+- `memorable` - CVC-pattern memorable passwords
+- `segmented` - Hyphen-delimited 3-character segments (e.g., htV-jQ4-A9s-hbY)
 
 ### version
 
@@ -79,7 +81,7 @@ ohmypassword generate --help
 aB3$kL9@mN2pQ
 ```
 
-With validation (`-v`):
+With validation (`-V`):
 ```
 Password: aB3$kL9@mN2pQ
   Entropy: 95.27 bits
@@ -178,8 +180,11 @@ ohmypassword generate -n 5
 # Generate passphrase
 ohmypassword generate -s passphrase -l 4
 
+# Generate segmented password
+ohmypassword generate -s segmented
+
 # Show password strength
-ohmypassword generate -v
+ohmypassword generate -V
 
 # Output as JSON
 ohmypassword generate -o json

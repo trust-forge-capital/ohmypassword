@@ -40,7 +40,6 @@ Core password generation logic:
 - **password.go**: Main generator orchestration
 - **options.go**: Configuration options validation
 - **entropy.go**: Entropy calculation
-- **charset.go**: Character set handling
 - **types.go**: Type definitions
 
 ### internal/random
@@ -54,6 +53,8 @@ Generation strategies:
 - **simple.go**: Simple random characters
 - **pronounceable.go**: Human-readable passwords
 - **passphrase.go**: Word-based passwords
+- **memorable.go**: CVC-pattern memorable passwords
+- **segmented.go**: Hyphen-delimited segment passwords
 
 ### internal/validator
 Password strength analysis:
@@ -68,7 +69,6 @@ Internationalization:
 ### internal/ui
 Output formatting:
 - **output.go**: Main output functions
-- **formatter.go**: Format interfaces
 - **spinner.go**: Progress display
 
 ### pkg/charset
