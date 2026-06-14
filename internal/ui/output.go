@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/trust-forge-capital/ohmypassword/internal/i18n"
@@ -348,12 +349,12 @@ func hasSuggestions(results []CheckResult) bool {
 }
 
 func joinSuggestions(s []string) string {
-	result := ""
-	for i, s := range s {
+	var sb strings.Builder
+	for i, item := range s {
 		if i > 0 {
-			result += "; "
+			sb.WriteString("; ")
 		}
-		result += s
+		sb.WriteString(item)
 	}
-	return result
+	return sb.String()
 }

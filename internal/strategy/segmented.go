@@ -23,6 +23,7 @@ func (s *SegmentedStrategy) Generate(opts *Options) (string, error) {
 	if opts.ExcludeSimilar {
 		chars = charset.ExcludeSimilarChars(chars)
 	}
+	chars = excludeSeparator(chars, s.separator)
 
 	totalChars := opts.Length
 	if totalChars < s.segmentLength {
@@ -41,6 +42,19 @@ func (s *SegmentedStrategy) Generate(opts *Options) (string, error) {
 	}
 
 	return s.segment(string(password)), nil
+}
+
+// excludeSeparator returns a copy of chars with every rune of sep removed so
+// the generated password can never contain the segment separator, which would
+// otherwise make the segmented output ambiguous.
+func excludeSeparator(chars []rune, sep string) []rune {
+	result := make([]rune, 0, len(chars))
+	for _, c := range chars {
+		if !strings.ContainsRune(sep, c) {
+			result = append(result, c)
+		}
+	}
+	return result
 }
 
 func (s *SegmentedStrategy) segment(password string) string {

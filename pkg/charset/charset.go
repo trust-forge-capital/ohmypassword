@@ -92,31 +92,27 @@ func GetCharset(name string) Charset {
 	}
 }
 
+var defaultCharsetRunes = []rune(CharsetUpper + CharsetLower + CharsetDigit + CharsetSymbol)
+
+var charsetRuneCache = map[string][]rune{
+	"upper":                    []rune(CharsetUpper),
+	"lower":                    []rune(CharsetLower),
+	"digit":                    []rune(CharsetDigit),
+	"lower,digit":              []rune(CharsetLower + CharsetDigit),
+	"symbol":                   []rune(CharsetSymbol),
+	"upper,lower":              []rune(CharsetUpper + CharsetLower),
+	"upper,lower,digit":        []rune(CharsetUpper + CharsetLower + CharsetDigit),
+	"upper,lower,digit,symbol": defaultCharsetRunes,
+}
+
+// GetCharsetRunes returns the rune set for the given charset name. The returned
+// slice is a shared, pre-computed cache entry and must be treated as read-only;
+// callers that need to mutate should copy it first.
 func GetCharsetRunes(charset string) []rune {
-	var chars []rune
-
-	switch charset {
-	case "upper":
-		chars = []rune(CharsetUpper)
-	case "lower":
-		chars = []rune(CharsetLower)
-	case "digit":
-		chars = []rune(CharsetDigit)
-	case "lower,digit":
-		chars = []rune(CharsetLower + CharsetDigit)
-	case "symbol":
-		chars = []rune(CharsetSymbol)
-	case "upper,lower":
-		chars = []rune(CharsetUpper + CharsetLower)
-	case "upper,lower,digit":
-		chars = []rune(CharsetUpper + CharsetLower + CharsetDigit)
-	case "upper,lower,digit,symbol":
-		chars = []rune(CharsetUpper + CharsetLower + CharsetDigit + CharsetSymbol)
-	default:
-		chars = []rune(CharsetUpper + CharsetLower + CharsetDigit + CharsetSymbol)
+	if chars, ok := charsetRuneCache[charset]; ok {
+		return chars
 	}
-
-	return chars
+	return defaultCharsetRunes
 }
 
 func GetCharsetSize(charset string) int {

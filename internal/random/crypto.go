@@ -1,6 +1,7 @@
 package random
 
 import (
+	"bufio"
 	"crypto/rand"
 	"encoding/binary"
 	"errors"
@@ -11,9 +12,13 @@ type CryptoRNG struct {
 	reader io.Reader
 }
 
+// NewCryptoRNG returns a CryptoRNG backed by crypto/rand. The reader is wrapped
+// in a buffer so that generating a password issues a single read from the OS
+// CSPRNG instead of one read per character; the random bytes served are still
+// produced by crypto/rand, so the cryptographic guarantees are unchanged.
 func NewCryptoRNG() *CryptoRNG {
 	return &CryptoRNG{
-		reader: rand.Reader,
+		reader: bufio.NewReaderSize(rand.Reader, 256),
 	}
 }
 

@@ -54,6 +54,13 @@ func calculateScore(entropyBits int) int {
 	}
 }
 
+var (
+	reLower  = regexp.MustCompile(`[a-z]`)
+	reUpper  = regexp.MustCompile(`[A-Z]`)
+	reDigit  = regexp.MustCompile(`[0-9]`)
+	reSymbol = regexp.MustCompile(`[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]`)
+)
+
 func generateSuggestions(password string, charsetSize int) []string {
 	var suggestions []string
 
@@ -61,10 +68,10 @@ func generateSuggestions(password string, charsetSize int) []string {
 		suggestions = append(suggestions, "Use a longer password (12+ characters)")
 	}
 
-	hasLower := regexp.MustCompile(`[a-z]`).MatchString(password)
-	hasUpper := regexp.MustCompile(`[A-Z]`).MatchString(password)
-	hasDigit := regexp.MustCompile(`[0-9]`).MatchString(password)
-	hasSymbol := regexp.MustCompile(`[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]`).MatchString(password)
+	hasLower := reLower.MatchString(password)
+	hasUpper := reUpper.MatchString(password)
+	hasDigit := reDigit.MatchString(password)
+	hasSymbol := reSymbol.MatchString(password)
 
 	if !hasLower {
 		suggestions = append(suggestions, "Add lowercase letters")
